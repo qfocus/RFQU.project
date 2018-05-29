@@ -32,7 +32,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -40,7 +39,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbxTeacher = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -48,10 +47,20 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.添加信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加教师ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加课程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加学员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加报名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clbCourse = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -66,10 +75,16 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 149);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 178);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(868, 326);
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridView1.Size = new System.Drawing.Size(940, 474);
             this.dataGridView1.TabIndex = 1;
             // 
             // label2
@@ -89,17 +104,6 @@
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "学员 :";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "人像",
-            "素描基础"});
-            this.listBox1.Location = new System.Drawing.Point(48, 19);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(124, 108);
-            this.listBox1.TabIndex = 7;
             // 
             // textBox1
             // 
@@ -158,16 +162,14 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "教师 :";
             // 
-            // comboBox2
+            // cbxTeacher
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "帅飞"});
-            this.comboBox2.Location = new System.Drawing.Point(222, 23);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(88, 21);
-            this.comboBox2.TabIndex = 16;
-            this.comboBox2.Text = "帅飞";
+            this.cbxTeacher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxTeacher.FormattingEnabled = true;
+            this.cbxTeacher.Location = new System.Drawing.Point(222, 23);
+            this.cbxTeacher.Name = "cbxTeacher";
+            this.cbxTeacher.Size = new System.Drawing.Size(88, 21);
+            this.cbxTeacher.TabIndex = 16;
             // 
             // textBox4
             // 
@@ -203,7 +205,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(794, 114);
+            this.button3.Location = new System.Drawing.Point(796, 139);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 21;
@@ -222,22 +224,17 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(739, 21);
+            this.label8.Location = new System.Drawing.Point(776, 45);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.Size = new System.Drawing.Size(49, 13);
             this.label8.TabIndex = 23;
-            this.label8.Text = "报警值(天) :";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(816, 17);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(64, 20);
-            this.textBox6.TabIndex = 24;
+            this.label8.Text = "报警值 :";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.clbCourse);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.button4);
@@ -253,30 +250,113 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 1);
+            this.groupBox1.Controls.Add(this.cbxTeacher);
+            this.groupBox1.Location = new System.Drawing.Point(11, 30);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(683, 142);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(222, 86);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(88, 21);
+            this.comboBox1.TabIndex = 24;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(179, 89);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "缴费 :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(839, 45);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "30 (天) ";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加信息ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(964, 24);
+            this.menuStrip1.TabIndex = 28;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 添加信息ToolStripMenuItem
+            // 
+            this.添加信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加教师ToolStripMenuItem,
+            this.添加课程ToolStripMenuItem,
+            this.添加学员ToolStripMenuItem,
+            this.添加报名ToolStripMenuItem});
+            this.添加信息ToolStripMenuItem.Name = "添加信息ToolStripMenuItem";
+            this.添加信息ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.添加信息ToolStripMenuItem.Text = "信息管理";
+            // 
+            // 添加教师ToolStripMenuItem
+            // 
+            this.添加教师ToolStripMenuItem.Name = "添加教师ToolStripMenuItem";
+            this.添加教师ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加教师ToolStripMenuItem.Text = "教师管理";
+            // 
+            // 添加课程ToolStripMenuItem
+            // 
+            this.添加课程ToolStripMenuItem.Name = "添加课程ToolStripMenuItem";
+            this.添加课程ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加课程ToolStripMenuItem.Text = "课程管理";
+            // 
+            // 添加学员ToolStripMenuItem
+            // 
+            this.添加学员ToolStripMenuItem.Name = "添加学员ToolStripMenuItem";
+            this.添加学员ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加学员ToolStripMenuItem.Text = "学员管理";
+            // 
+            // 添加报名ToolStripMenuItem
+            // 
+            this.添加报名ToolStripMenuItem.Name = "添加报名ToolStripMenuItem";
+            this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加报名ToolStripMenuItem.Text = "报名管理";
+            // 
+            // clbCourse
+            // 
+            this.clbCourse.FormattingEnabled = true;
+            this.clbCourse.Location = new System.Drawing.Point(48, 20);
+            this.clbCourse.Name = "clbCourse";
+            this.clbCourse.Size = new System.Drawing.Size(120, 94);
+            this.clbCourse.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 487);
+            this.ClientSize = new System.Drawing.Size(964, 664);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "小仙女专用 1.0 版  by 噢不";
+            this.Text = "小仙女专用 v1.0  by 噢不";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,7 +368,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
@@ -296,7 +375,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbxTeacher;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox5;
@@ -304,8 +383,17 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 添加信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加教师ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加课程ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加学员ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加报名ToolStripMenuItem;
+        private System.Windows.Forms.CheckedListBox clbCourse;
     }
 }
 
