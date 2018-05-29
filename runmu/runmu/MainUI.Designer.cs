@@ -48,6 +48,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.clbCourse = new System.Windows.Forms.CheckedListBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@
             this.添加课程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加学员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加报名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clbCourse = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -75,17 +75,18 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(12, 178);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(940, 474);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // label2
             // 
@@ -258,6 +259,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // clbCourse
+            // 
+            this.clbCourse.FormattingEnabled = true;
+            this.clbCourse.Location = new System.Drawing.Point(48, 20);
+            this.clbCourse.Name = "clbCourse";
+            this.clbCourse.Size = new System.Drawing.Size(120, 94);
+            this.clbCourse.TabIndex = 25;
+            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -308,34 +317,26 @@
             // 添加教师ToolStripMenuItem
             // 
             this.添加教师ToolStripMenuItem.Name = "添加教师ToolStripMenuItem";
-            this.添加教师ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加教师ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加教师ToolStripMenuItem.Text = "教师管理";
             // 
             // 添加课程ToolStripMenuItem
             // 
             this.添加课程ToolStripMenuItem.Name = "添加课程ToolStripMenuItem";
-            this.添加课程ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加课程ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加课程ToolStripMenuItem.Text = "课程管理";
             // 
             // 添加学员ToolStripMenuItem
             // 
             this.添加学员ToolStripMenuItem.Name = "添加学员ToolStripMenuItem";
-            this.添加学员ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加学员ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加学员ToolStripMenuItem.Text = "学员管理";
             // 
             // 添加报名ToolStripMenuItem
             // 
             this.添加报名ToolStripMenuItem.Name = "添加报名ToolStripMenuItem";
-            this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加报名ToolStripMenuItem.Text = "报名管理";
-            // 
-            // clbCourse
-            // 
-            this.clbCourse.FormattingEnabled = true;
-            this.clbCourse.Location = new System.Drawing.Point(48, 20);
-            this.clbCourse.Name = "clbCourse";
-            this.clbCourse.Size = new System.Drawing.Size(120, 94);
-            this.clbCourse.TabIndex = 25;
             // 
             // Form1
             // 
