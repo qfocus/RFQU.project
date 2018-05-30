@@ -7,27 +7,40 @@ using System.Text;
 
 namespace runmu.Service
 {
-    public class CourseService
+    public class CourseService : IService
     {
-        public DataTable GetCourses()
+        private static string sql = "select id, name as '姓名' ,qq as 'QQ', alias as '昵称',email from teacher";
+
+
+        public DataTable GetAll()
         {
-            DataTable table = new DataTable();
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=runmu.db;Version=3;"))
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 conn.Open();
-                string sql = "select * from course";
-                SQLiteCommand command = new SQLiteCommand(sql, conn);
-                SQLiteDataAdapter adp = new SQLiteDataAdapter(command);
-
-                adp.Fill(table);
+                DataTable table = GetAll(conn);
 
                 conn.Close();
+
+                return table;
             }
+        }
 
-            return table;
+        public DataTable GetAll(SQLiteConnection conn)
+        {
+            DataTable result = new DataTable();
 
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
 
+            SQLiteDataAdapter adp = new SQLiteDataAdapter(command);
 
+            adp.Fill(result);
+
+            return result;
+        }
+
+        public bool Update<T>(T item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

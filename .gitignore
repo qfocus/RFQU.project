@@ -4,6 +4,7 @@
 # c#:
 *.dll
 *.suo
+.vs
 bin
 obj
 packages

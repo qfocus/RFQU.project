@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,10 +56,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.添加信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加教师ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teacherMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.添加课程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加学员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加报名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -75,8 +78,6 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -86,7 +87,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(940, 474);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // label2
             // 
@@ -306,7 +306,7 @@
             // 添加信息ToolStripMenuItem
             // 
             this.添加信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.添加教师ToolStripMenuItem,
+            this.teacherMgmt,
             this.添加课程ToolStripMenuItem,
             this.添加学员ToolStripMenuItem,
             this.添加报名ToolStripMenuItem});
@@ -314,11 +314,13 @@
             this.添加信息ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.添加信息ToolStripMenuItem.Text = "信息管理";
             // 
-            // 添加教师ToolStripMenuItem
+            // teacherMgmt
             // 
-            this.添加教师ToolStripMenuItem.Name = "添加教师ToolStripMenuItem";
-            this.添加教师ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.添加教师ToolStripMenuItem.Text = "教师管理";
+            this.teacherMgmt.AutoSize = false;
+            this.teacherMgmt.Name = "teacherMgmt";
+            this.teacherMgmt.Size = new System.Drawing.Size(180, 22);
+            this.teacherMgmt.Text = "教师管理";
+            this.teacherMgmt.Click += new System.EventHandler(this.TeacherMgmt_Click);
             // 
             // 添加课程ToolStripMenuItem
             // 
@@ -338,6 +340,13 @@
             this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加报名ToolStripMenuItem.Text = "报名管理";
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.Click += new System.EventHandler(this.NotifyIcon_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,8 +358,12 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "小仙女专用 v1.0  by 噢不";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -390,11 +403,12 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 添加信息ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 添加教师ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teacherMgmt;
         private System.Windows.Forms.ToolStripMenuItem 添加课程ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 添加学员ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 添加报名ToolStripMenuItem;
         private System.Windows.Forms.CheckedListBox clbCourse;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
