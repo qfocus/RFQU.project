@@ -57,7 +57,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.添加信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teacherMgmt = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加课程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.courseMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.添加学员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加报名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -307,7 +307,7 @@
             // 
             this.添加信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.teacherMgmt,
-            this.添加课程ToolStripMenuItem,
+            this.courseMgmt,
             this.添加学员ToolStripMenuItem,
             this.添加报名ToolStripMenuItem});
             this.添加信息ToolStripMenuItem.Name = "添加信息ToolStripMenuItem";
@@ -322,22 +322,23 @@
             this.teacherMgmt.Text = "教师管理";
             this.teacherMgmt.Click += new System.EventHandler(this.TeacherMgmt_Click);
             // 
-            // 添加课程ToolStripMenuItem
+            // courseMgmt
             // 
-            this.添加课程ToolStripMenuItem.Name = "添加课程ToolStripMenuItem";
-            this.添加课程ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.添加课程ToolStripMenuItem.Text = "课程管理";
+            this.courseMgmt.Name = "courseMgmt";
+            this.courseMgmt.Size = new System.Drawing.Size(180, 22);
+            this.courseMgmt.Text = "课程管理";
+            this.courseMgmt.Click += new System.EventHandler(this.CourseMgmt_Click);
             // 
             // 添加学员ToolStripMenuItem
             // 
             this.添加学员ToolStripMenuItem.Name = "添加学员ToolStripMenuItem";
-            this.添加学员ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.添加学员ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.添加学员ToolStripMenuItem.Text = "学员管理";
             // 
             // 添加报名ToolStripMenuItem
             // 
             this.添加报名ToolStripMenuItem.Name = "添加报名ToolStripMenuItem";
-            this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.添加报名ToolStripMenuItem.Text = "报名管理";
             // 
             // notifyIcon1
@@ -404,7 +405,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 添加信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teacherMgmt;
-        private System.Windows.Forms.ToolStripMenuItem 添加课程ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem courseMgmt;
         private System.Windows.Forms.ToolStripMenuItem 添加学员ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 添加报名ToolStripMenuItem;
         private System.Windows.Forms.CheckedListBox clbCourse;

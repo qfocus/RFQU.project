@@ -10,12 +10,12 @@ namespace runmu.Service
     public abstract class Service : IService
     {
 
-        protected abstract string GetSql();
+        protected abstract string SelectAllSql();
 
 
         public virtual DataTable GetAll(SQLiteConnection conn)
         {
-            string sql = GetSql();
+            string sql = SelectAllSql();
 
             DataTable result = new DataTable();
 

@@ -9,9 +9,9 @@ namespace runmu.Service
 {
     public class TeacherService : Service
     {
-        private static string sql = "select id, name as '姓名' ,qq as 'QQ', alias as '昵称',email from teacher";
+        private static string sql = "select ID, name as '姓名' ,qq as 'QQ', alias as '昵称',email from teacher";
 
-        protected override string GetSql()
+        protected override string SelectAllSql()
         {
             return sql;
         }

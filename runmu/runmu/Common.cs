@@ -9,16 +9,15 @@ namespace runmu
 {
     public class Common
     {
+        private static DataGridViewCellStyle defaultStyle = new DataGridViewCellStyle
+        {
+            Alignment = DataGridViewContentAlignment.MiddleCenter
+        };
+
         public static void BindData(DataGridView dataContainer, DataTable source)
         {
-            DataGridViewCellStyle defaultStyle = new System.Windows.Forms.DataGridViewCellStyle
-            {
-                Alignment = DataGridViewContentAlignment.MiddleCenter
-            };
+            dataContainer.DataSource = null;
 
-            dataContainer.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dataContainer.AutoGenerateColumns = false;
             dataContainer.DataSource = source;
 
             for (int i = 0; i < source.Columns.Count; i++)
@@ -29,15 +28,26 @@ namespace runmu
                     HeaderText = source.Columns[i].ColumnName,
                     DataPropertyName = source.Columns[i].ColumnName,
                     DefaultCellStyle = defaultStyle
-
-
                 };
                 dataContainer.Columns.Add(column);
             }
-            dataContainer.Columns["id"].Visible = false;
+
+            foreach (DataGridViewColumn column in dataContainer.Columns)
+            {
+                if (column.Name.Contains("ID"))
+                {
+                    column.Visible = false;
+                }
+            }
+        }
+
+        public static void InitDataContainer(DataGridView dataContainer)
+        {
+            dataContainer.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataContainer.AutoGenerateColumns = false;
         }
 
 
     }
-
 }

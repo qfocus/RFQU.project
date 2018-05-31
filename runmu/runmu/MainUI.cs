@@ -32,11 +32,6 @@ namespace runmu
         private void Form1_Load(object sender, EventArgs e)
         {
 
-
-
-            InitTeachers();
-            InitCourses();
-
         }
 
         private void InitTeachers()
@@ -66,6 +61,16 @@ namespace runmu
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
+        }
+
+        private void CourseMgmt_Click(object sender, EventArgs e)
+        {
+            InfoMgmt course = new InfoMgmt(container.Resolve<CourseService>())
+            {
+                Text = "课程管理",
+                Name = "course"
+            };
+            course.ShowDialog();
         }
     }
 }

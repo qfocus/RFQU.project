@@ -24,6 +24,8 @@ namespace runmu
         {
             DataTable table = service.GetAll();
 
+            Common.InitDataContainer(dataContainer);
+
             Common.BindData(dataContainer, table);
         }
 
@@ -45,7 +47,7 @@ namespace runmu
 
             foreach (DataGridViewRow row in selected)
             {
-                int id = Convert.ToInt32(row.Cells["id"].Value);
+                int id = Convert.ToInt32(row.Cells["ID"].Value);
                 ids.Add(id);
             }
             DialogResult dialogResult = MessageBox.Show("你确定要删除这些数据吗？", "噢不!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -54,9 +56,6 @@ namespace runmu
             {
                 return;
             }
-
-
-
 
         }
     }

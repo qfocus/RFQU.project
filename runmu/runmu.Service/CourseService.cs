@@ -7,40 +7,13 @@ using System.Text;
 
 namespace runmu.Service
 {
-    public class CourseService : IService
+    public class CourseService : Service
     {
-        private static string sql = "select id, name as '姓名' ,qq as 'QQ', alias as '昵称',email from teacher";
+        private static string sql = @"select c.ID, c.teacherID, c.name as '课程', c.price as '价格', t.name as '教师' from course as c join teacher as t on c.teacherId =  t.id";
 
-
-        public DataTable GetAll()
+        protected override string SelectAllSql()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
-            {
-                conn.Open();
-                DataTable table = GetAll(conn);
-
-                conn.Close();
-
-                return table;
-            }
-        }
-
-        public DataTable GetAll(SQLiteConnection conn)
-        {
-            DataTable result = new DataTable();
-
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-
-            SQLiteDataAdapter adp = new SQLiteDataAdapter(command);
-
-            adp.Fill(result);
-
-            return result;
-        }
-
-        public bool Update<T>(T item)
-        {
-            throw new NotImplementedException();
+            return sql;
         }
     }
 }
