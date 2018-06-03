@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Unity;
 
-namespace runmu.Service
+namespace runmu.Business
 {
     public class ContainerBootstrapper
     {

@@ -5,13 +5,14 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-namespace runmu.Service
+namespace runmu.Business
 {
     public interface IService
     {
         DataTable GetAll();
         DataTable GetAll(SQLiteConnection conn);
-        bool Update<T>(T item);
+        bool Update(DataTable item);
         bool Delete(List<int> ids);
+        bool Add(Model model);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace runmu.Service
+namespace runmu.Business
 {
     public sealed class Constants
     {

@@ -5,13 +5,14 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-namespace runmu.Service
+namespace runmu.Business
 {
     public abstract class Service : IService
     {
 
         protected abstract string SelectAllSql();
-
+        public abstract bool Update(DataTable table);
+        public abstract bool Add(Model model);
 
         public virtual DataTable GetAll(SQLiteConnection conn)
         {
@@ -43,14 +44,13 @@ namespace runmu.Service
         }
 
 
-        public virtual bool Update<T>(T item)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Delete(List<int> ids)
         {
             throw new NotImplementedException();
         }
+
+    
+
     }
 }

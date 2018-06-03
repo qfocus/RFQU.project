@@ -1,4 +1,4 @@
-﻿using runmu.Service;
+﻿using runmu.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,11 +50,8 @@ namespace runmu
 
         private void TeacherMgmt_Click(object sender, EventArgs e)
         {
-            InfoMgmt teacher = new InfoMgmt(container.Resolve<TeacherService>())
-            {
-                Text = "教师管理",
-                Name = "teacher"
-            };
+            TeacherMgmt teacher = new TeacherMgmt(container);
+
             teacher.ShowDialog();
         }
 
@@ -65,11 +62,8 @@ namespace runmu
 
         private void CourseMgmt_Click(object sender, EventArgs e)
         {
-            InfoMgmt course = new InfoMgmt(container.Resolve<CourseService>())
-            {
-                Text = "课程管理",
-                Name = "course"
-            };
+            CourseMgmt course = new CourseMgmt(container);
+         
             course.ShowDialog();
         }
     }
