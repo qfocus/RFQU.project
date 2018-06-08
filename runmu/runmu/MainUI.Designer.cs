@@ -58,8 +58,8 @@
             this.添加信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teacherMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.courseMgmt = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加学员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加报名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.studentsMgmt = new System.Windows.Forms.ToolStripMenuItem();
+            this.signUpMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -308,8 +308,8 @@
             this.添加信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.teacherMgmt,
             this.courseMgmt,
-            this.添加学员ToolStripMenuItem,
-            this.添加报名ToolStripMenuItem});
+            this.studentsMgmt,
+            this.signUpMgmt});
             this.添加信息ToolStripMenuItem.Name = "添加信息ToolStripMenuItem";
             this.添加信息ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.添加信息ToolStripMenuItem.Text = "信息管理";
@@ -329,17 +329,19 @@
             this.courseMgmt.Text = "课程管理";
             this.courseMgmt.Click += new System.EventHandler(this.CourseMgmt_Click);
             // 
-            // 添加学员ToolStripMenuItem
+            // studentsMgmt
             // 
-            this.添加学员ToolStripMenuItem.Name = "添加学员ToolStripMenuItem";
-            this.添加学员ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.添加学员ToolStripMenuItem.Text = "学员管理";
+            this.studentsMgmt.Name = "studentsMgmt";
+            this.studentsMgmt.Size = new System.Drawing.Size(180, 22);
+            this.studentsMgmt.Text = "学员管理";
+            this.studentsMgmt.Click += new System.EventHandler(this.StudentsMgmt_Click);
             // 
-            // 添加报名ToolStripMenuItem
+            // signUpMgmt
             // 
-            this.添加报名ToolStripMenuItem.Name = "添加报名ToolStripMenuItem";
-            this.添加报名ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.添加报名ToolStripMenuItem.Text = "报名管理";
+            this.signUpMgmt.Name = "signUpMgmt";
+            this.signUpMgmt.Size = new System.Drawing.Size(180, 22);
+            this.signUpMgmt.Text = "报名管理";
+            this.signUpMgmt.Click += new System.EventHandler(this.signUpMgmt_Click);
             // 
             // notifyIcon1
             // 
@@ -406,8 +408,8 @@
         private System.Windows.Forms.ToolStripMenuItem 添加信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teacherMgmt;
         private System.Windows.Forms.ToolStripMenuItem courseMgmt;
-        private System.Windows.Forms.ToolStripMenuItem 添加学员ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 添加报名ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem studentsMgmt;
+        private System.Windows.Forms.ToolStripMenuItem signUpMgmt;
         private System.Windows.Forms.CheckedListBox clbCourse;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
     }

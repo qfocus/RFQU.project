@@ -66,5 +66,17 @@ namespace runmu
          
             course.ShowDialog();
         }
+
+        private void StudentsMgmt_Click(object sender, EventArgs e)
+        {
+            StudentsMgmt students = new StudentsMgmt(container);
+            students.ShowDialog();
+        }
+
+        private void signUpMgmt_Click(object sender, EventArgs e)
+        {
+            SignUpMgmt sign = new SignUpMgmt();
+            sign.ShowDialog();
+        }
     }
 }

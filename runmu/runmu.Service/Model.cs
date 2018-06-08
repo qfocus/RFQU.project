@@ -11,6 +11,8 @@ namespace runmu.Business
         string alias;
         string qq;
         string email;
+        string phone;
+        string weChat;
         int teacherId;
         double price;
 
@@ -21,6 +23,8 @@ namespace runmu.Business
         public string Email { get => email; set => email = SetString(value); }
         public double Price { get => price; set => price = value; }
         public int TeacherId { get => teacherId; set => teacherId = value; }
+        public string Phone { get => phone; set => phone = value; }
+        public string WeChat { get => weChat; set => weChat = SetString(value); }
 
         private string SetString(string value)
         {

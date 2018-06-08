@@ -10,7 +10,8 @@ namespace runmu.Business
     public class TeacherService : Service
     {
         private static string selectAllSql = "SELECT ID, name as '姓名' ,qq as 'QQ', alias as '昵称',email FROM teacher";
-        private static string updateSql = "UPDATE teacher set name = @name, alias = @alias, qq = @qq, email = @email, lastModifiedTime = @date WHERE ID = @id;";
+        private static string updateSql = @"UPDATE teacher set name = @name, alias = @alias, qq = @qq, email = @email, 
+                                            lastModifiedTime = @date WHERE ID = @id;";
         private static string insertSql = @"INSERT INTO `teacher`
                                            (`name`,`alias`,`qq`,`email`,`createdTime`,`lastModifiedTime`) VALUES 
                                            (@name, @alias, @qq, @email, @date, @date);";

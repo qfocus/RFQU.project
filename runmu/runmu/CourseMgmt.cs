@@ -77,13 +77,19 @@ namespace runmu
 
         }
 
-        private void RefreshData() {
+        private void RefreshData()
+        {
             DataTable table = courseService.GetAll();
 
             dataContainer.DataSource = table;
 
         }
 
-
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            DataTable source = (DataTable)dataContainer.DataSource;
+            courseService.Update(source);
+            RefreshData();
+        }
     }
 }
