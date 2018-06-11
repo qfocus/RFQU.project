@@ -11,8 +11,9 @@ namespace runmu.Business
     {
 
         protected abstract string SelectAllSql();
-        public abstract bool Update(DataTable table);
-        public abstract bool Add(Model model);
+        public abstract bool Update(SQLiteConnection conn, DataTable table);
+        public abstract bool Add(SQLiteConnection conn, Model model);
+        public abstract DataTable Query(SQLiteConnection conn, object id);
 
         public virtual DataTable GetAll(SQLiteConnection conn)
         {
@@ -29,28 +30,10 @@ namespace runmu.Business
             return result;
         }
 
-
-        public virtual DataTable GetAll()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
-            {
-                conn.Open();
-                DataTable table = GetAll(conn);
-
-                conn.Close();
-
-                return table;
-            }
-        }
-
-
-
-        public bool Delete(List<int> ids)
+        public bool Delete(SQLiteConnection conn, List<int> ids)
         {
             throw new NotImplementedException();
         }
-
-    
 
     }
 }

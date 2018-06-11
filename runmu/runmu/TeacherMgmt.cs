@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,22 @@ namespace runmu
 
         private void TeacherUI_Load(object sender, EventArgs e)
         {
-            DataTable table = service.GetAll();
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
 
-            FormCommon.InitDataContainer(dataContainer, table);
+                    DataTable table = service.GetAll(conn);
+                    FormCommon.InitDataContainer(dataContainer, table);
 
-            dataContainer.DataSource = table;
-
+                    dataContainer.DataSource = table;
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                }
+            }
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -38,8 +49,21 @@ namespace runmu
             {
                 return;
             }
-            service.Update((DataTable)dataContainer.DataSource);
-            RefreshData();
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
+
+                    service.Update(conn, (DataTable)dataContainer.DataSource);
+                    RefreshData(conn);
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                }
+            }
+
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -82,15 +106,29 @@ namespace runmu
                 Alias = txtAlias.Text,
                 Email = txtEmail.Text
             };
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
 
-            service.Add(model);
+                    service.Add(conn, model);
+                    RefreshData(conn);
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                }
+            }
+
+
             MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            RefreshData();
+
         }
-        private void RefreshData()
+        private void RefreshData(SQLiteConnection conn)
         {
             dataContainer.DataSource = null;
-            DataTable source = service.GetAll();
+            DataTable source = service.GetAll(conn);
             dataContainer.DataSource = source;
         }
     }

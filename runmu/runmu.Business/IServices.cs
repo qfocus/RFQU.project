@@ -9,10 +9,11 @@ namespace runmu.Business
 {
     public interface IService
     {
-        DataTable GetAll();
+
         DataTable GetAll(SQLiteConnection conn);
-        bool Update(DataTable item);
-        bool Delete(List<int> ids);
-        bool Add(Model model);
+        DataTable Query(SQLiteConnection conn, object id);
+        bool Update(SQLiteConnection conn, DataTable item);
+        bool Delete(SQLiteConnection conn, List<int> ids);
+        bool Add(SQLiteConnection conn, Model model);
     }
 }

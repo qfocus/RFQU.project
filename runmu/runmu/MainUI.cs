@@ -15,8 +15,7 @@ namespace runmu
     public partial class Form1 : Form
     {
         IUnityContainer container;
-        public static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Form1));
-
+     
         public Form1(IUnityContainer container)
         {
             this.container = container;
@@ -31,7 +30,7 @@ namespace runmu
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Initailizer.Init();
         }
 
         private void InitTeachers()
@@ -63,7 +62,7 @@ namespace runmu
         private void CourseMgmt_Click(object sender, EventArgs e)
         {
             CourseMgmt course = new CourseMgmt(container);
-         
+
             course.ShowDialog();
         }
 
@@ -75,8 +74,9 @@ namespace runmu
 
         private void signUpMgmt_Click(object sender, EventArgs e)
         {
-            SignUpMgmt sign = new SignUpMgmt();
+            SignUpMgmt sign = new SignUpMgmt(container);
             sign.ShowDialog();
         }
     }
+
 }

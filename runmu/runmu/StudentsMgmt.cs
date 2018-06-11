@@ -1,10 +1,7 @@
 ﻿using runmu.Business;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.SQLite;
 using System.Windows.Forms;
 using Unity;
 
@@ -48,24 +45,52 @@ namespace runmu
                 WeChat = txtWechat.Text
             };
             model.Phone = txtPhone.Text;
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
 
-            service.Add(model);
-            MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            RefreshData();
+                    service.Add(conn, model);
+                    RefreshData(conn);
+
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+
+            }
         }
 
         private void StudentsMgmt_Load(object sender, EventArgs e)
         {
-            DataTable source = service.GetAll();
-            FormCommon.InitDataContainer(dataContainer, source);
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    DataTable source = service.GetAll(conn);
+                    FormCommon.InitDataContainer(dataContainer, source);
 
-            dataContainer.DataSource = source;
+                    dataContainer.DataSource = source;
+
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+            }
         }
 
-        private void RefreshData()
+        private void RefreshData(SQLiteConnection conn)
         {
             dataContainer.DataSource = null;
-            DataTable source = service.GetAll();
+            DataTable source = service.GetAll(conn);
             dataContainer.DataSource = source;
         }
 
@@ -77,8 +102,22 @@ namespace runmu
             {
                 return;
             }
-            service.Update((DataTable)dataContainer.DataSource);
-            RefreshData();
+
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
+
+                    service.Update(conn, (DataTable)dataContainer.DataSource);
+                    RefreshData(conn);
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                }
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,22 +27,36 @@ namespace runmu
 
         private void CourseMgmt_Load(object sender, EventArgs e)
         {
-            DataTable teachers = teacherService.GetAll();
-            cmbTeacher.DataSource = teachers;
-            cmbTeacher.ValueMember = "ID";
-            cmbTeacher.DisplayMember = "姓名";
-            teacherNames = new Dictionary<string, int>();
-
-            foreach (DataRow row in teachers.Rows)
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
-                teacherNames.Add(row["姓名"].ToString(), Convert.ToInt32(row["ID"]));
+                try
+                {
+                    conn.Open();
+
+                    DataTable teachers = teacherService.GetAll(conn);
+                    cmbTeacher.DataSource = teachers;
+                    cmbTeacher.ValueMember = "ID";
+                    cmbTeacher.DisplayMember = "姓名";
+                    teacherNames = new Dictionary<string, int>();
+
+                    foreach (DataRow row in teachers.Rows)
+                    {
+                        teacherNames.Add(row["姓名"].ToString(), Convert.ToInt32(row["ID"]));
+                    }
+
+                    DataTable courses = courseService.GetAll(conn);
+
+                    FormCommon.InitDataContainer(dataContainer, courses);
+
+                    dataContainer.DataSource = courses;
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                }
             }
 
-            DataTable courses = courseService.GetAll();
-
-            FormCommon.InitDataContainer(dataContainer, courses);
-
-            dataContainer.DataSource = courses;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -71,15 +86,28 @@ namespace runmu
                 Price = price
             };
 
-            courseService.Add(model);
-            MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            RefreshData();
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    courseService.Add(conn, model);
+
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RefreshData(conn);
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+            }
 
         }
 
-        private void RefreshData()
+        private void RefreshData(SQLiteConnection conn)
         {
-            DataTable table = courseService.GetAll();
+            DataTable table = courseService.GetAll(conn);
 
             dataContainer.DataSource = table;
 
@@ -87,9 +115,24 @@ namespace runmu
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            DataTable source = (DataTable)dataContainer.DataSource;
-            courseService.Update(source);
-            RefreshData();
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    DataTable source = (DataTable)dataContainer.DataSource;
+                    courseService.Update(conn, source);
+                    RefreshData(conn);
+
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+            }
         }
     }
 }

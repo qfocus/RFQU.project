@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "runmu.UI", "runmu\runmu.UI.csproj", "{3D15FE95-2711-4265-9F5B-95F251B24A9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "runmu.Business", "runmu.Service\runmu.Business.csproj", "{A58B0766-1277-4531-8EDE-3EF165A9544A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "runmu.Business", "runmu.Business\runmu.Business.csproj", "{A58B0766-1277-4531-8EDE-3EF165A9544A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
