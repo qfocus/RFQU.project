@@ -14,6 +14,7 @@ namespace runmu.Business
             container.RegisterSingleton<IService, CourseService>();
             container.RegisterSingleton<IService, StudentsService>();
             container.RegisterSingleton<IService, AssistantService>();
+            container.RegisterSingleton<IService, PlatformService>();
         }
     }
 }

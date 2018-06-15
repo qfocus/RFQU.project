@@ -21,7 +21,6 @@ namespace runmu.Business
 
         public override bool Add(SQLiteConnection conn, Model model)
         {
-
             DateTime now = DateTime.Now;
             SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
             cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@name", Value = model.Name, DbType = DbType.String });
@@ -33,14 +32,13 @@ namespace runmu.Business
 
             cmd.ExecuteNonQuery();
 
-
             return true;
         }
 
         public override DataTable Query(SQLiteConnection conn, object id)
         {
             DateTime now = DateTime.Now;
-            SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
+            SQLiteCommand cmd = new SQLiteCommand(querySql, conn);
             cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@qq", Value = id, DbType = DbType.Int32 });
             DataTable table = new DataTable();
             SQLiteDataAdapter adp = new SQLiteDataAdapter(cmd);

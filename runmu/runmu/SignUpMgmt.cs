@@ -54,8 +54,6 @@ namespace runmu
                     cmbAssistant.DataSource = assistant;
                     cmbAssistant.DisplayMember = "name";
                     cmbAssistant.ValueMember = "id";
-
-
                 }
                 catch (Exception error)
                 {
@@ -98,7 +96,10 @@ namespace runmu
                     lblName.Text = table.Rows[0]["name"].ToString();
 
                 }
-                catch (Exception exception) { }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception);
+                }
             }
         }
 

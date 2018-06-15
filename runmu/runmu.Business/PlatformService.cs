@@ -4,13 +4,13 @@ using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace runmu.Business
 {
-    public class AssistantService : Service
+    public class PlatformService : Service
     {
-        private static string selectAllSql = "SELECT ID, name AS '姓名' FROM assistant;";
-
+        private static string getAllSql = "SELECT ID, name AS '平台' FROM platform;";
 
         public override bool Add(SQLiteConnection conn, Model model)
         {
@@ -29,7 +29,7 @@ namespace runmu.Business
 
         protected override string SelectAllSql()
         {
-            return selectAllSql;
+            return getAllSql;
         }
     }
 }

@@ -45,11 +45,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbPlatform = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmbPlatform);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.lblName);
             this.groupBox1.Controls.Add(this.dtpPayment);
@@ -94,7 +98,7 @@
             // 
             this.dtpPayment.CustomFormat = "yyyy-MM-dd";
             this.dtpPayment.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPayment.Location = new System.Drawing.Point(291, 76);
+            this.dtpPayment.Location = new System.Drawing.Point(291, 106);
             this.dtpPayment.Name = "dtpPayment";
             this.dtpPayment.Size = new System.Drawing.Size(81, 20);
             this.dtpPayment.TabIndex = 12;
@@ -102,7 +106,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(223, 78);
+            this.label7.Location = new System.Drawing.Point(223, 108);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 11;
@@ -112,7 +116,7 @@
             // 
             this.dtpSignup.CustomFormat = "yyyy-MM-dd";
             this.dtpSignup.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSignup.Location = new System.Drawing.Point(291, 51);
+            this.dtpSignup.Location = new System.Drawing.Point(291, 81);
             this.dtpSignup.Name = "dtpSignup";
             this.dtpSignup.Size = new System.Drawing.Size(81, 20);
             this.dtpSignup.TabIndex = 10;
@@ -176,7 +180,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(223, 53);
+            this.label4.Location = new System.Drawing.Point(223, 83);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 3;
@@ -208,6 +212,24 @@
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "学员QQ :";
+            // 
+            // cmbPlatform
+            // 
+            this.cmbPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPlatform.FormattingEnabled = true;
+            this.cmbPlatform.Location = new System.Drawing.Point(291, 44);
+            this.cmbPlatform.Name = "cmbPlatform";
+            this.cmbPlatform.Size = new System.Drawing.Size(110, 21);
+            this.cmbPlatform.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(224, 50);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "报名平台 :";
             // 
             // SignUpMgmt
             // 
@@ -244,5 +266,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ComboBox cmbPlatform;
+        private System.Windows.Forms.Label label8;
     }
 }

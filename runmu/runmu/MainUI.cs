@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -15,10 +16,13 @@ namespace runmu
     public partial class Form1 : Form
     {
         IUnityContainer container;
-     
+        StudentsService studentsService;
+
+
         public Form1(IUnityContainer container)
         {
             this.container = container;
+            studentsService = container.Resolve<StudentsService>();
             InitializeComponent();
         }
 
@@ -72,10 +76,87 @@ namespace runmu
             students.ShowDialog();
         }
 
-        private void signUpMgmt_Click(object sender, EventArgs e)
+        private void SignUpMgmt_Click(object sender, EventArgs e)
         {
             SignUpMgmt sign = new SignUpMgmt(container);
             sign.ShowDialog();
+        }
+
+        private void Import_Click(object sender, EventArgs e)
+        {
+            string name = OpenCsvFile();
+
+            if (name == null)
+            {
+                //MessageBox.Show("程序需要学员！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
+
+
+
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                conn.Open();
+                SQLiteTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    Importer.ImportStudents(studentsService, conn, name);
+
+                    MessageBox.Show("学员信息导入成功！继续导入报名信息！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
+                    name = OpenCsvFile();
+
+                    if (name == null)
+                    {
+                        MessageBox.Show("程序需要学员！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        return;
+                    }
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    transaction.Rollback();
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                }
+
+            }
+        }
+
+        private string OpenCsvFile()
+        {
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return null;
+            }
+            string name = openFileDialog1.FileName;
+
+            if (!File.Exists(name))
+            {
+                MessageBox.Show("文件找不到了！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return null;
+            }
+
+            if (!".csv".Equals(Path.GetExtension(name), StringComparison.CurrentCultureIgnoreCase))
+            {
+                MessageBox.Show("CSV！CSV！CSV！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return null;
+            }
+
+            return name;
+        }
+
+        private void TsmPlatform_Click(object sender, EventArgs e)
+        {
+            PlatformMgmt platform = new PlatformMgmt(container);
+            platform.ShowDialog();
+        }
+
+        private void TsmAssistant_Click(object sender, EventArgs e)
+        {
+            AssistantMgmt assistant = new AssistantMgmt(container);
+            assistant.ShowDialog();
         }
     }
 

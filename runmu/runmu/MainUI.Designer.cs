@@ -60,7 +60,12 @@
             this.courseMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.studentsMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.signUpMgmt = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAssistant = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmPlatform = new System.Windows.Forms.ToolStripMenuItem();
+            this.系统设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -124,7 +129,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(410, 23);
+            this.textBox2.Location = new System.Drawing.Point(418, 23);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(64, 20);
             this.textBox2.TabIndex = 10;
@@ -132,7 +137,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(477, 27);
+            this.label4.Location = new System.Drawing.Point(485, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 13);
             this.label4.TabIndex = 11;
@@ -140,7 +145,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(496, 23);
+            this.textBox3.Location = new System.Drawing.Point(504, 23);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(62, 20);
             this.textBox3.TabIndex = 12;
@@ -174,7 +179,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(495, 55);
+            this.textBox4.Location = new System.Drawing.Point(503, 55);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(62, 20);
             this.textBox4.TabIndex = 19;
@@ -182,7 +187,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(476, 59);
+            this.label7.Location = new System.Drawing.Point(484, 59);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 13);
             this.label7.TabIndex = 18;
@@ -190,7 +195,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(409, 55);
+            this.textBox5.Location = new System.Drawing.Point(417, 55);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(64, 20);
             this.textBox5.TabIndex = 17;
@@ -206,7 +211,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(796, 139);
+            this.button3.Location = new System.Drawing.Point(877, 143);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 21;
@@ -225,7 +230,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(776, 45);
+            this.label8.Location = new System.Drawing.Point(849, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 13);
             this.label8.TabIndex = 23;
@@ -287,7 +292,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(839, 45);
+            this.label10.Location = new System.Drawing.Point(912, 49);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(43, 13);
             this.label10.TabIndex = 27;
@@ -296,7 +301,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.添加信息ToolStripMenuItem});
+            this.添加信息ToolStripMenuItem,
+            this.系统设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(964, 24);
@@ -309,7 +315,9 @@
             this.teacherMgmt,
             this.courseMgmt,
             this.studentsMgmt,
-            this.signUpMgmt});
+            this.signUpMgmt,
+            this.tsmAssistant,
+            this.tsmPlatform});
             this.添加信息ToolStripMenuItem.Name = "添加信息ToolStripMenuItem";
             this.添加信息ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.添加信息ToolStripMenuItem.Text = "信息管理";
@@ -341,7 +349,36 @@
             this.signUpMgmt.Name = "signUpMgmt";
             this.signUpMgmt.Size = new System.Drawing.Size(180, 22);
             this.signUpMgmt.Text = "报名管理";
-            this.signUpMgmt.Click += new System.EventHandler(this.signUpMgmt_Click);
+            this.signUpMgmt.Click += new System.EventHandler(this.SignUpMgmt_Click);
+            // 
+            // tsmAssistant
+            // 
+            this.tsmAssistant.Name = "tsmAssistant";
+            this.tsmAssistant.Size = new System.Drawing.Size(180, 22);
+            this.tsmAssistant.Text = "助理管理";
+            this.tsmAssistant.Click += new System.EventHandler(this.TsmAssistant_Click);
+            // 
+            // tsmPlatform
+            // 
+            this.tsmPlatform.Name = "tsmPlatform";
+            this.tsmPlatform.Size = new System.Drawing.Size(180, 22);
+            this.tsmPlatform.Text = "平台管理";
+            this.tsmPlatform.Click += new System.EventHandler(this.TsmPlatform_Click);
+            // 
+            // 系统设置ToolStripMenuItem
+            // 
+            this.系统设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmStudent});
+            this.系统设置ToolStripMenuItem.Name = "系统设置ToolStripMenuItem";
+            this.系统设置ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.系统设置ToolStripMenuItem.Text = "系统设置";
+            // 
+            // tsmStudent
+            // 
+            this.tsmStudent.Name = "tsmStudent";
+            this.tsmStudent.Size = new System.Drawing.Size(122, 22);
+            this.tsmStudent.Text = "导入数据";
+            this.tsmStudent.Click += new System.EventHandler(this.Import_Click);
             // 
             // notifyIcon1
             // 
@@ -349,6 +386,10 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.Click += new System.EventHandler(this.NotifyIcon_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFile";
             // 
             // Form1
             // 
@@ -412,6 +453,11 @@
         private System.Windows.Forms.ToolStripMenuItem signUpMgmt;
         private System.Windows.Forms.CheckedListBox clbCourse;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ToolStripMenuItem 系统设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmStudent;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem tsmAssistant;
+        private System.Windows.Forms.ToolStripMenuItem tsmPlatform;
     }
 }
 

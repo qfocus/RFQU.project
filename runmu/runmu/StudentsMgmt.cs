@@ -72,6 +72,7 @@ namespace runmu
             {
                 try
                 {
+                    conn.Open();
                     DataTable source = service.GetAll(conn);
                     FormCommon.InitDataContainer(dataContainer, source);
 
