@@ -1,5 +1,6 @@
 ﻿using runmu.Business;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -36,22 +37,22 @@ namespace runmu
                 return;
             }
 
-
-            Model model = new Model
+            Dictionary<string, object> paras = new Dictionary<string, object>
             {
-                Name = txtName.Text,
-                Qq = txtQQ.Text,
-                Phone = txtPhone.Text,
-                WeChat = txtWechat.Text
+                { PropertyName.NAME, txtName.Text.Trim() },
+                { PropertyName.QQ,txtQQ.Text },
+                { PropertyName.Phone,txtPhone.Text},
+                { PropertyName.Wechat,txtWechat.Text},
+                { PropertyName.Email,txtEmail.Text}
             };
-            model.Phone = txtPhone.Text;
+
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 try
                 {
                     conn.Open();
 
-                    service.Add(conn, model);
+                    service.Add(conn, paras);
                     RefreshData(conn);
 
                     MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -59,7 +60,7 @@ namespace runmu
                 catch (Exception error)
                 {
                     Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    MessageBox.Show("出问题了，快去找大师兄！\r" + error.Message, "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     return;
                 }
 
@@ -81,9 +82,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                    return;
+                    FormCommon.HandleError(error);
                 }
             }
         }
@@ -112,11 +111,11 @@ namespace runmu
 
                     service.Update(conn, (DataTable)dataContainer.DataSource);
                     RefreshData(conn);
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    FormCommon.HandleError(error);
                 }
             }
         }

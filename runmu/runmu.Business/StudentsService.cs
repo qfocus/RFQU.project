@@ -13,27 +13,13 @@ namespace runmu.Business
         private static string insertSql = @"INSERT INTO `students`
                                          (`name`,`qq`,`email`,`phone`,`weChat`,`createdTime`,`lastModifiedTime`) VALUES
                                          (@name, @qq, @email, @phone, @weChat, @date, @date);";
-        private static string updateSql = @"UPDATE students set name = @name, email = @email, phone = @phone,
+        private static string updateSql = @"UPDATE students set name = @name, email = @email, phone = @phone, wechat = @wechat,
                                             lastModifiedTime = @date WHERE ID = @id;";
 
         private static string querySql = @"SELECT ID, name from students WHERE QQ = @qq;";
 
 
-        public override bool Add(SQLiteConnection conn, Model model)
-        {
-            DateTime now = DateTime.Now;
-            SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@name", Value = model.Name, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@email", Value = model.Email, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@phone", Value = model.Phone, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@qq", Value = model.Qq, DbType = DbType.Int64 });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@weChat", Value = model.WeChat, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@date", Value = now.ToString(), DbType = DbType.String });
 
-            cmd.ExecuteNonQuery();
-
-            return true;
-        }
 
         public override DataTable Query(SQLiteConnection conn, object id)
         {
@@ -80,6 +66,16 @@ namespace runmu.Business
 
 
             return true;
+        }
+
+        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        {
+            return BuildDefaultParams(values);
+        }
+
+        protected override string InsertSql()
+        {
+            return insertSql;
         }
 
         protected override string SelectAllSql()

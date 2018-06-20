@@ -16,22 +16,6 @@ namespace runmu.Business
                                            (`name`,`alias`,`qq`,`email`,`createdTime`,`lastModifiedTime`) VALUES 
                                            (@name, @alias, @qq, @email, @date, @date);";
 
-        public override bool Add(SQLiteConnection conn, Model model)
-        {
-
-            DateTime now = DateTime.Now;
-            SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@name", Value = model.Name, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@alias", Value = model.Alias, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@qq", Value = model.Qq, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@email", Value = model.Email, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@date", Value = now.ToString(), DbType = DbType.String });
-
-            cmd.ExecuteNonQuery();
-
-
-            return true;
-        }
 
         public override DataTable Query(SQLiteConnection conn, object id)
         {
@@ -70,6 +54,16 @@ namespace runmu.Business
 
 
             return true;
+        }
+
+        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        {
+            return BuildDefaultParams(values);
+        }
+
+        protected override string InsertSql()
+        {
+            return insertSql;
         }
 
         protected override string SelectAllSql()

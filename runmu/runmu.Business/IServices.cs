@@ -14,6 +14,6 @@ namespace runmu.Business
         DataTable Query(SQLiteConnection conn, object id);
         bool Update(SQLiteConnection conn, DataTable item);
         bool Delete(SQLiteConnection conn, List<int> ids);
-        bool Add(SQLiteConnection conn, Model model);
+        void Add(SQLiteConnection conn, Dictionary<string, object> values);
     }
 }

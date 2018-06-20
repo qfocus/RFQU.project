@@ -25,6 +25,7 @@ namespace runmu
             InitializeComponent();
         }
 
+
         private void CourseMgmt_Load(object sender, EventArgs e)
         {
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
@@ -48,12 +49,15 @@ namespace runmu
 
                     FormCommon.InitDataContainer(dataContainer, courses);
 
+                    dataContainer.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                    dataContainer.AutoGenerateColumns = false;
+
                     dataContainer.DataSource = courses;
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    FormCommon.HandleError(error);
                 }
             }
 
@@ -79,27 +83,32 @@ namespace runmu
                 return;
             }
 
-            Model model = new Model
+            if (MessageBox.Show("你确定？", "噢不！", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
-                Name = txtCourse.Text.Trim(),
-                TeacherId = Convert.ToInt32(cmbTeacher.SelectedValue),
-                Price = price
+                return;
+            }
+
+            Dictionary<string, object> paras = new Dictionary<string, object>
+            {
+                { PropertyName.NAME, txtCourse.Text.Trim() },
+                { PropertyName.Price, price },
+                { PropertyName.TeacherID, cmbTeacher.SelectedValue }
             };
+
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 try
                 {
-                    courseService.Add(conn, model);
+                    conn.Open();
+                    courseService.Add(conn, paras);
 
                     MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     RefreshData(conn);
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                    return;
+                    FormCommon.HandleError(error);
                 }
             }
 
@@ -113,12 +122,13 @@ namespace runmu
 
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void Update_Click(object sender, EventArgs e)
         {
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 try
                 {
+                    conn.Open();
                     DataTable source = (DataTable)dataContainer.DataSource;
                     courseService.Update(conn, source);
                     RefreshData(conn);
@@ -128,9 +138,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                    return;
+                    FormCommon.HandleError(error);
                 }
             }
         }

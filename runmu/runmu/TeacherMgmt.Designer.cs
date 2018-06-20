@@ -43,6 +43,7 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtQQ = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnQuery = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataContainer)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -59,14 +60,14 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataContainer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataContainer.Location = new System.Drawing.Point(26, 118);
+            this.dataContainer.Location = new System.Drawing.Point(26, 152);
             this.dataContainer.Name = "dataContainer";
-            this.dataContainer.Size = new System.Drawing.Size(478, 449);
+            this.dataContainer.Size = new System.Drawing.Size(492, 415);
             this.dataContainer.TabIndex = 9;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(348, 584);
+            this.btnSave.Location = new System.Drawing.Point(356, 584);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 7;
@@ -76,7 +77,8 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(429, 584);
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(437, 584);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 6;
@@ -122,9 +124,9 @@
             // 
             // txtAdd
             // 
-            this.txtAdd.Location = new System.Drawing.Point(425, 64);
+            this.txtAdd.Location = new System.Drawing.Point(330, 104);
             this.txtAdd.Name = "txtAdd";
-            this.txtAdd.Size = new System.Drawing.Size(47, 23);
+            this.txtAdd.Size = new System.Drawing.Size(75, 23);
             this.txtAdd.TabIndex = 5;
             this.txtAdd.Text = "添加";
             this.txtAdd.UseVisualStyleBackColor = true;
@@ -160,6 +162,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnQuery);
             this.groupBox1.Controls.Add(this.txtAlias);
             this.groupBox1.Controls.Add(this.txtQQ);
             this.groupBox1.Controls.Add(this.label1);
@@ -171,10 +174,20 @@
             this.groupBox1.Controls.Add(this.txtAdd);
             this.groupBox1.Location = new System.Drawing.Point(26, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(478, 99);
+            this.groupBox1.Size = new System.Drawing.Size(492, 133);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "添加教师";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.Enabled = false;
+            this.btnQuery.Location = new System.Drawing.Point(411, 104);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.TabIndex = 7;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.UseVisualStyleBackColor = true;
             // 
             // TeacherMgmt
             // 
@@ -219,5 +232,6 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtQQ;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnQuery;
     }
 }

@@ -11,34 +11,30 @@ namespace runmu
 {
     public sealed class Importer
     {
-        public static void ImportStudents(IService service, SQLiteConnection conn, string path)
+        public static void ImportFullPaymentStudents(IService service, SQLiteConnection conn, string path)
         {
             List<string> list = new List<string>();
-            List<string> duplicate = new List<string>();
 
             TextReader textReader = File.OpenText(path);
-
+            Dictionary<string, object> paras = new Dictionary<string, object>();
             CsvReader reader = new CsvReader(textReader);
             reader.Read();
 
             while (reader.Read())
             {
-                string name = reader[0];
-                string qq = reader[1];
+                string name = reader[4];
+                string qq = reader[3];
                 if (list.Contains(qq))
                 {
-                    duplicate.Add(qq + ":" + name);
                     continue;
                 }
                 list.Add(qq);
-                Model model = new Model
-                {
-                    Qq = qq,
-                    Name = name
-                };
-                service.Add(conn, model);
+                paras.Add(PropertyName.NAME, name);
+                paras.Add(PropertyName.QQ, qq);
+
+                service.Add(conn, paras);
+                paras.Clear();
             }
-            Logger.Warnning(duplicate);
         }
     }
 }

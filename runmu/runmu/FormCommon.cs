@@ -9,7 +9,7 @@ namespace runmu
 {
     public class FormCommon
     {
-        private static DataGridViewCellStyle defaultStyle = new DataGridViewCellStyle
+        public static DataGridViewCellStyle defaultStyle = new DataGridViewCellStyle
         {
             Alignment = DataGridViewContentAlignment.MiddleCenter
         };
@@ -40,6 +40,12 @@ namespace runmu
                     column.Visible = false;
                 }
             }
+        }
+
+        public static void HandleError(Exception error)
+        {
+            Logger.Error(error);
+            MessageBox.Show("出问题了，快去找大师兄！\r" + error.Message, "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
 
 

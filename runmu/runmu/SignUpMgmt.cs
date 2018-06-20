@@ -96,9 +96,9 @@ namespace runmu
                     lblName.Text = table.Rows[0]["name"].ToString();
 
                 }
-                catch (Exception exception)
+                catch (Exception error)
                 {
-                    Logger.Error(exception);
+                    FormCommon.HandleError(error);
                 }
             }
         }

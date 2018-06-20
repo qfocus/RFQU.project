@@ -33,7 +33,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtPlatform = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataContainer)).BeginInit();
@@ -48,9 +48,9 @@
             this.dataContainer.AllowUserToResizeColumns = false;
             this.dataContainer.AllowUserToResizeRows = false;
             this.dataContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataContainer.Location = new System.Drawing.Point(9, 91);
+            this.dataContainer.Location = new System.Drawing.Point(9, 69);
             this.dataContainer.Name = "dataContainer";
-            this.dataContainer.Size = new System.Drawing.Size(253, 258);
+            this.dataContainer.Size = new System.Drawing.Size(253, 280);
             this.dataContainer.TabIndex = 9;
             // 
             // btnUpdate
@@ -61,36 +61,37 @@
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.Update_Click);
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.Location = new System.Drawing.Point(187, 355);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "删除";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtPlatform);
+            this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(9, 22);
+            this.groupBox1.Location = new System.Drawing.Point(9, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(253, 63);
+            this.groupBox1.Size = new System.Drawing.Size(253, 51);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "添加助理";
             // 
-            // txtPlatform
+            // txtName
             // 
-            this.txtPlatform.Location = new System.Drawing.Point(53, 19);
-            this.txtPlatform.Name = "txtPlatform";
-            this.txtPlatform.Size = new System.Drawing.Size(100, 20);
-            this.txtPlatform.TabIndex = 1;
+            this.txtName.Location = new System.Drawing.Point(53, 19);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.TabIndex = 1;
             // 
             // btnAdd
             // 
@@ -100,7 +101,7 @@
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "添加";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.Add_Click);
             // 
             // label1
             // 
@@ -126,7 +127,7 @@
             this.MinimizeBox = false;
             this.Name = "AssistantMgmt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AssistantMgmt";
+            this.Text = "助理管理";
             this.Load += new System.EventHandler(this.AssistantMgmt_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataContainer)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -141,7 +142,7 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtPlatform;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label1;
     }

@@ -16,24 +16,7 @@ namespace runmu.Business
         private static string updateSql = @"UPDATE course set name = @name, price = @price, 
                                             lastModifiedTime = @date WHERE ID = @id;";
 
-        public override bool Add(SQLiteConnection conn, Model model)
-        {
-            string date = DateTime.Now.ToString();
-
-            DateTime now = DateTime.Now;
-            SQLiteCommand cmd = new SQLiteCommand(insertSql, conn);
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@teacherID", Value = model.TeacherId, DbType = DbType.Int32 });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@name", Value = model.Name, DbType = DbType.String });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@price", Value = model.Price, DbType = DbType.Double });
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@date", Value = date, DbType = DbType.String });
-
-
-            cmd.ExecuteNonQuery();
-
-
-            return true;
-        }
-
+    
         public override DataTable Query(SQLiteConnection conn, object id)
         {
             throw new NotImplementedException();
@@ -63,6 +46,16 @@ namespace runmu.Business
             }
 
             return true;
+        }
+
+        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        {
+            return BuildDefaultParams(values);
+        }
+
+        protected override string InsertSql()
+        {
+            return insertSql;
         }
 
         protected override string SelectAllSql()

@@ -23,19 +23,72 @@ namespace runmu
             InitializeComponent();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void Update_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("你确定？", "噢不!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (dialogResult != DialogResult.OK)
+            {
+                return;
+            }
+
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
+
+                    service.Update(conn, (DataTable)dataContainer.DataSource);
+                    RefreshData(conn);
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception error)
+                {
+                    Logger.Error(error);
+                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                }
+            }
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                MessageBox.Show("弄啥咧，你没有输入名字！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
 
-        }
+            if (MessageBox.Show("你确定？", "噢不！", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            {
+                return;
+            }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
 
+            Dictionary<string, object> paras = new Dictionary<string, object>
+            {
+                { PropertyName.NAME, txtName.Text.Trim() }
+            };
+
+            using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
+            {
+                try
+                {
+                    conn.Open();
+                    service.Add(conn, paras);
+                    RefreshData(conn);
+
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception error)
+                {
+                    FormCommon.HandleError(error);
+                }
+            }
         }
 
         private void AssistantMgmt_Load(object sender, EventArgs e)
@@ -50,8 +103,9 @@ namespace runmu
                     FormCommon.InitDataContainer(dataContainer, source);
                     this.dataContainer.DataSource = source;
                 }
-                catch (Exception ex)
+                catch (Exception error)
                 {
+                    FormCommon.HandleError(error);
                 }
             }
         }

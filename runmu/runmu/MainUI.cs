@@ -88,11 +88,8 @@ namespace runmu
 
             if (name == null)
             {
-                //MessageBox.Show("程序需要学员！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return;
             }
-
-
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
@@ -100,19 +97,20 @@ namespace runmu
                 SQLiteTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    Importer.ImportStudents(studentsService, conn, name);
-
-                    MessageBox.Show("学员信息导入成功！继续导入报名信息！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
-
-                    name = OpenCsvFile();
-
-                    if (name == null)
-                    {
-                        MessageBox.Show("程序需要学员！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                        return;
-                    }
+                    Importer.ImportFullPaymentStudents(studentsService, conn, name);
 
                     transaction.Commit();
+
+                    DataTable originalStudents = studentsService.GetAll(conn);
+
+                    Dictionary<int, int> students = new Dictionary<int, int>();
+
+                    foreach (DataRow row in originalStudents.Rows)
+                    {
+
+                    }
+
+
                 }
                 catch (Exception ex)
                 {

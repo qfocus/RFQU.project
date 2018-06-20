@@ -102,6 +102,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="ContainerBootstrapper.cs" />
     <Compile Include="CourseService.cs" />
+    <Compile Include="PropertyName.cs" />
     <Compile Include="IServices.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="PlatformService.cs" />

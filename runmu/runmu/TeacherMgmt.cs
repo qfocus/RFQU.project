@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
 
@@ -36,7 +37,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
+                    FormCommon.HandleError(error);
                 }
             }
         }
@@ -60,7 +61,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
+                    FormCommon.HandleError(error);
                 }
             }
 
@@ -99,30 +100,44 @@ namespace runmu
                 return;
             }
 
-            Model model = new Model
+
+            if (!Regex.IsMatch(txtQQ.Text, @"^\d{0,11}$"))
             {
-                Name = txtName.Text,
-                Qq = txtQQ.Text,
-                Alias = txtAlias.Text,
-                Email = txtEmail.Text
+                MessageBox.Show("请输入人类的QQ！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
+
+            if (MessageBox.Show("你确定？", "噢不！", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            {
+                return;
+            }
+
+            Dictionary<string, object> paras = new Dictionary<string, object>
+            {
+                { PropertyName.NAME, txtName.Text.Trim() },
+                { PropertyName.QQ,txtQQ.Text },
+                { PropertyName.Alias,txtAlias.Text},
+                { PropertyName.Email,txtEmail.Text},
+
             };
+
+
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 try
                 {
                     conn.Open();
 
-                    service.Add(conn, model);
+                    service.Add(conn, paras);
                     RefreshData(conn);
+                    MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
+                    FormCommon.HandleError(error);
                 }
             }
 
-
-            MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
         private void RefreshData(SQLiteConnection conn)

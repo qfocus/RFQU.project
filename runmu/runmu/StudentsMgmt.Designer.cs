@@ -44,12 +44,14 @@
             this.dataContainer = new System.Windows.Forms.DataGridView();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnQuery = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataContainer)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnQuery);
             this.groupBox1.Controls.Add(this.lblWechat);
             this.groupBox1.Controls.Add(this.txtWechat);
             this.groupBox1.Controls.Add(this.txtAdd);
@@ -63,7 +65,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(506, 114);
+            this.groupBox1.Size = new System.Drawing.Size(569, 114);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "添加学员";
@@ -86,7 +88,7 @@
             // 
             // txtAdd
             // 
-            this.txtAdd.Location = new System.Drawing.Point(425, 85);
+            this.txtAdd.Location = new System.Drawing.Point(407, 85);
             this.txtAdd.Name = "txtAdd";
             this.txtAdd.Size = new System.Drawing.Size(75, 23);
             this.txtAdd.TabIndex = 9;
@@ -165,12 +167,12 @@
             this.dataContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataContainer.Location = new System.Drawing.Point(12, 132);
             this.dataContainer.Name = "dataContainer";
-            this.dataContainer.Size = new System.Drawing.Size(506, 298);
+            this.dataContainer.Size = new System.Drawing.Size(569, 304);
             this.dataContainer.TabIndex = 12;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(362, 436);
+            this.btnUpdate.Location = new System.Drawing.Point(425, 461);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 10;
@@ -180,18 +182,29 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(443, 436);
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(506, 461);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "删除";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
+            // btnQuery
+            // 
+            this.btnQuery.Enabled = false;
+            this.btnQuery.Location = new System.Drawing.Point(488, 85);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.TabIndex = 11;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.UseVisualStyleBackColor = true;
+            // 
             // StudentsMgmt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 468);
+            this.ClientSize = new System.Drawing.Size(593, 496);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dataContainer);
@@ -229,5 +242,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label lblWechat;
         private System.Windows.Forms.TextBox txtWechat;
+        private System.Windows.Forms.Button btnQuery;
     }
 }

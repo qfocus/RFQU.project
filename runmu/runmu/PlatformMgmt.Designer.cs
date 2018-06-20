@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlatformMgmt));
             this.label1 = new System.Windows.Forms.Label();
-            this.txtPlatform = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -49,12 +49,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "平台 :";
             // 
-            // txtPlatform
+            // txtName
             // 
-            this.txtPlatform.Location = new System.Drawing.Point(53, 19);
-            this.txtPlatform.Name = "txtPlatform";
-            this.txtPlatform.Size = new System.Drawing.Size(100, 20);
-            this.txtPlatform.TabIndex = 1;
+            this.txtName.Location = new System.Drawing.Point(53, 19);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.TabIndex = 1;
             // 
             // btnAdd
             // 
@@ -64,15 +64,16 @@
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "添加";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.Add_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtPlatform);
+            this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(11, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(253, 63);
+            this.groupBox1.Size = new System.Drawing.Size(253, 52);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "添加平台";
@@ -85,9 +86,11 @@
             this.btnUpdate.TabIndex = 3;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.Update_Click);
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.Location = new System.Drawing.Point(189, 341);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
@@ -97,10 +100,12 @@
             // 
             // dataContainer
             // 
+            this.dataContainer.AllowUserToAddRows = false;
+            this.dataContainer.AllowUserToDeleteRows = false;
             this.dataContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataContainer.Location = new System.Drawing.Point(11, 77);
+            this.dataContainer.Location = new System.Drawing.Point(11, 66);
             this.dataContainer.Name = "dataContainer";
-            this.dataContainer.Size = new System.Drawing.Size(253, 258);
+            this.dataContainer.Size = new System.Drawing.Size(253, 269);
             this.dataContainer.TabIndex = 5;
             // 
             // PlatformMgmt
@@ -117,7 +122,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PlatformMgmt";
-            this.Text = "PlatformMgmt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "平台管理";
             this.Load += new System.EventHandler(this.PlatformMgmt_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -129,7 +135,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPlatform;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnUpdate;

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUpMgmt));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbPlatform = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.dtpPayment = new System.Windows.Forms.DateTimePicker();
@@ -45,13 +47,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbPlatform = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.btnQuery = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnQuery);
             this.groupBox1.Controls.Add(this.cmbPlatform);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.btnAdd);
@@ -76,9 +78,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "添加报名";
             // 
+            // cmbPlatform
+            // 
+            this.cmbPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPlatform.FormattingEnabled = true;
+            this.cmbPlatform.Location = new System.Drawing.Point(291, 44);
+            this.cmbPlatform.Name = "cmbPlatform";
+            this.cmbPlatform.Size = new System.Drawing.Size(110, 21);
+            this.cmbPlatform.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(224, 50);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "报名平台 :";
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(473, 107);
+            this.btnAdd.Location = new System.Drawing.Point(392, 106);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 14;
@@ -213,23 +233,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "学员QQ :";
             // 
-            // cmbPlatform
+            // btnQuery
             // 
-            this.cmbPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPlatform.FormattingEnabled = true;
-            this.cmbPlatform.Location = new System.Drawing.Point(291, 44);
-            this.cmbPlatform.Name = "cmbPlatform";
-            this.cmbPlatform.Size = new System.Drawing.Size(110, 21);
-            this.cmbPlatform.TabIndex = 16;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(224, 50);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "报名平台 :";
+            this.btnQuery.Enabled = false;
+            this.btnQuery.Location = new System.Drawing.Point(473, 106);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.TabIndex = 1003;
+            this.btnQuery.Text = "查询 ";
+            this.btnQuery.UseVisualStyleBackColor = true;
             // 
             // SignUpMgmt
             // 
@@ -268,5 +280,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ComboBox cmbPlatform;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnQuery;
     }
 }
