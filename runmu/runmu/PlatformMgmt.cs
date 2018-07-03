@@ -24,7 +24,6 @@ namespace runmu
 
         private void PlatformMgmt_Load(object sender, EventArgs e)
         {
-
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 try
@@ -36,6 +35,7 @@ namespace runmu
                 }
                 catch (Exception ex)
                 {
+                    FormCommon.HandleException(ex);
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace runmu
 
             Dictionary<string, object> paras = new Dictionary<string, object>
             {
-                { PropertyName.NAME, txtName.Text.Trim() }
+                { AttributeName.NAME, txtName.Text.Trim() }
             };
 
 
@@ -80,7 +80,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }

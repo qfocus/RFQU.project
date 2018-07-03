@@ -37,7 +37,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
 
@@ -114,10 +114,10 @@ namespace runmu
 
             Dictionary<string, object> paras = new Dictionary<string, object>
             {
-                { PropertyName.NAME, txtName.Text.Trim() },
-                { PropertyName.QQ,txtQQ.Text },
-                { PropertyName.Alias,txtAlias.Text},
-                { PropertyName.Email,txtEmail.Text},
+                { AttributeName.NAME, txtName.Text.Trim() },
+                { AttributeName.QQ,txtQQ.Text },
+                { AttributeName.Alias,txtAlias.Text},
+                { AttributeName.Email,txtEmail.Text},
 
             };
 
@@ -134,7 +134,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
 

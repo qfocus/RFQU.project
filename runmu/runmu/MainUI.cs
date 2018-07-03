@@ -1,13 +1,9 @@
 ﻿using runmu.Business;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Unity;
 
@@ -17,12 +13,15 @@ namespace runmu
     {
         IUnityContainer container;
         StudentsService studentsService;
-
+        CourseService courseService;
+        TeacherService teacherService;
 
         public Form1(IUnityContainer container)
         {
             this.container = container;
-            studentsService = container.Resolve<StudentsService>();
+            this.studentsService = container.Resolve<StudentsService>();
+            this.courseService = container.Resolve<CourseService>();
+            this.teacherService = container.Resolve<TeacherService>();
             InitializeComponent();
         }
 
@@ -97,26 +96,25 @@ namespace runmu
                 SQLiteTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    Importer.ImportFullPaymentStudents(studentsService, conn, name);
-
+                    Importer importer = new Importer();
+                    importer.ImportFullPaymentStudents(studentsService, conn, name);
                     transaction.Commit();
+                    Logger.Info("Import students successfully");
 
                     DataTable originalStudents = studentsService.GetAll(conn);
 
-                    Dictionary<int, int> students = new Dictionary<int, int>();
+                    Dictionary<long, int> students = new Dictionary<long, int>();
 
                     foreach (DataRow row in originalStudents.Rows)
                     {
-
+                        students.Add(Convert.ToInt64(row[2]), Convert.ToInt32(row[1]));
                     }
 
 
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
-                    transaction.Rollback();
-                    MessageBox.Show("出问题了，快去找大师兄！", "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    FormCommon.HandleException(ex);
                 }
 
             }
@@ -155,6 +153,17 @@ namespace runmu
         {
             AssistantMgmt assistant = new AssistantMgmt(container);
             assistant.ShowDialog();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon1.Dispose();
+        }
+
+        private void PaymentMgmt_Click(object sender, EventArgs e)
+        {
+            PaymentMgmt payment = new PaymentMgmt(container);
+            payment.ShowDialog();
         }
     }
 

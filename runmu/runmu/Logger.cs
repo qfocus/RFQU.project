@@ -22,5 +22,10 @@ namespace runmu
                 logger.Warn(item);
             }
         }
+
+        public static void Info(string message)
+        {
+            logger.Info(message);
+        }
     }
 }

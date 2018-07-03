@@ -9,18 +9,16 @@ namespace runmu.Business
 {
     public class CourseService : Service
     {
-        private static string selectSql = @"SELECT c.ID, c.teacherID, c.name as '课程', c.price as '价格', t.name as '教师' from course as c join teacher as t on c.teacherId =  t.id";
+        private static string tableName = "`course`";
+        private static string selectSql = @"SELECT c.ID, c.name as '课程', c.teacherID,  c.price as '价格', t.name as '教师' from course as c join teacher as t on c.teacherId =  t.id";
         private static string insertSql = @"INSERT INTO `course`
-                                           (`teacherID`,`name`,`price`,`createdTime`,`lastModifiedTime`) VALUES 
+                                           (`teacherID`,`name`,`price`,`createdTime`,`updateTime`) VALUES 
                                            (@teacherID, @name, @price, @date, @date);";
         private static string updateSql = @"UPDATE course set name = @name, price = @price, 
-                                            lastModifiedTime = @date WHERE ID = @id;";
+                                            updateTime = @date WHERE ID = @id;";
 
     
-        public override DataTable Query(SQLiteConnection conn, object id)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public override bool Update(SQLiteConnection conn, DataTable table)
         {
@@ -50,17 +48,38 @@ namespace runmu.Business
 
         protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
         {
-            return BuildDefaultParams(values);
+            return BuildDefaultOperateParams(values);
         }
 
-        protected override string InsertSql()
+        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetInsertSql()
         {
             return insertSql;
         }
 
-        protected override string SelectAllSql()
+
+        protected override string QuerySql(Dictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetQuerySql()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetSelectAllSql()
         {
             return selectSql;
+        }
+
+        protected override string TableName()
+        {
+            return tableName;
         }
     }
 }

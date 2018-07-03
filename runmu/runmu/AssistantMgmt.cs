@@ -71,7 +71,7 @@ namespace runmu
 
             Dictionary<string, object> paras = new Dictionary<string, object>
             {
-                { PropertyName.NAME, txtName.Text.Trim() }
+                { AttributeName.NAME, txtName.Text.Trim() }
             };
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
@@ -86,7 +86,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }

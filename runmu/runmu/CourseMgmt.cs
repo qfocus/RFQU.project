@@ -57,7 +57,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
 
@@ -90,9 +90,9 @@ namespace runmu
 
             Dictionary<string, object> paras = new Dictionary<string, object>
             {
-                { PropertyName.NAME, txtCourse.Text.Trim() },
-                { PropertyName.Price, price },
-                { PropertyName.TeacherID, cmbTeacher.SelectedValue }
+                { AttributeName.NAME, txtCourse.Text.Trim() },
+                { AttributeName.Price, price },
+                { AttributeName.TeacherID, cmbTeacher.SelectedValue }
             };
 
 
@@ -108,7 +108,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
 
@@ -138,7 +138,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }

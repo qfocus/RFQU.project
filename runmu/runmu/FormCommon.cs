@@ -42,12 +42,41 @@ namespace runmu
             }
         }
 
-        public static void HandleError(Exception error)
+        public static void HandleException(Exception ex)
         {
-            Logger.Error(error);
-            MessageBox.Show("出问题了，快去找大师兄！\r" + error.Message, "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            Logger.Error(ex);
+            MessageBox.Show("出问题了，快去找大师兄！\r" + ex.Message, "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
 
+        public static void BindComboxDataSource(Dictionary<int, string> source, ComboBox comboBox)
+        {
+            BindComboxDataSource(source, comboBox, false);
+        }
+
+        public static void BindComboxDataSource(Dictionary<int, string> source, ComboBox comboBox, bool withEmpty)
+        {
+            Dictionary<int, string> newValues = null;
+            if (withEmpty)
+            {
+                newValues = new Dictionary<int, string>
+                {
+                    { -1, "" }
+                };
+                foreach (var item in source)
+                {
+                    newValues.Add(item.Key, item.Value);
+                }
+            }
+            else
+            {
+                newValues = source;
+            }
+
+            comboBox.DataSource = new BindingSource(newValues, null);
+            comboBox.DisplayMember = "Value";
+            comboBox.ValueMember = "Key";
+            comboBox.SelectedIndex = 0;
+        }
 
     }
 }

@@ -12,15 +12,11 @@ namespace runmu.Business
     {
         private static string getAllSql = "SELECT ID, name AS '平台' FROM platform;";
         private static string insertSql = @"INSERT INTO `platform` 
-                                           (`name`,`createdTime`,`lastModifiedTime`) VALUES
+                                           (`name`,`createdTime`,`updateTime`) VALUES
                                            (@name, @date, @date);";
-        private static string updateSql = @"UPDATE `platform` SET name = @name, lastModifiedTime = @date WHERE ID = @id";
+        private static string updateSql = @"UPDATE `platform` SET name = @name, updateTime = @date WHERE ID = @id";
 
 
-        public override DataTable Query(SQLiteConnection conn, object id)
-        {
-            throw new NotImplementedException();
-        }
 
         public override bool Update(SQLiteConnection conn, DataTable table)
         {
@@ -46,17 +42,37 @@ namespace runmu.Business
 
         protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
         {
-            return BuildDefaultParams(values);
+            return BuildDefaultOperateParams(values);
         }
 
-        protected override string InsertSql()
+        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetInsertSql()
         {
             return insertSql;
         }
 
-        protected override string SelectAllSql()
+        protected override string QuerySql(Dictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetQuerySql()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetSelectAllSql()
         {
             return getAllSql;
+        }
+
+        protected override string TableName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

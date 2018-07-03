@@ -11,7 +11,17 @@ namespace runmu
 {
     public sealed class Importer
     {
-        public static void ImportFullPaymentStudents(IService service, SQLiteConnection conn, string path)
+        private Dictionary<long, int> qqMapping;
+        private Dictionary<string, int> teacherMapping;
+        private Dictionary<string, int> courseMaping;
+
+        public Importer()
+        {
+            this.qqMapping = new Dictionary<long, int>();
+        }
+
+
+        public void ImportFullPaymentStudents(IService service, SQLiteConnection conn, string path)
         {
             List<string> list = new List<string>();
 
@@ -29,9 +39,11 @@ namespace runmu
                     continue;
                 }
                 list.Add(qq);
-                paras.Add(PropertyName.NAME, name);
-                paras.Add(PropertyName.QQ, qq);
-
+                paras.Add(AttributeName.NAME, name);
+                paras.Add(AttributeName.QQ, qq);
+                paras.Add(AttributeName.Phone, 100000);
+                paras.Add(AttributeName.Wechat, "");
+                paras.Add(AttributeName.Email, "");
                 service.Add(conn, paras);
                 paras.Clear();
             }

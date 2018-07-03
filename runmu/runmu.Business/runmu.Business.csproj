@@ -7,8 +7,8 @@
     <ProjectGuid>{A58B0766-1277-4531-8EDE-3EF165A9544A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>runmu.Service</RootNamespace>
-    <AssemblyName>runmu.Service</AssemblyName>
+    <RootNamespace>runmu.Business</RootNamespace>
+    <AssemblyName>runmu.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -102,7 +102,10 @@
     <Compile Include="Constants.cs" />
     <Compile Include="ContainerBootstrapper.cs" />
     <Compile Include="CourseService.cs" />
-    <Compile Include="PropertyName.cs" />
+    <Compile Include="LearnStatusService.cs" />
+    <Compile Include="PaymentService.cs" />
+    <Compile Include="PaymentType.cs" />
+    <Compile Include="AttributeName.cs" />
     <Compile Include="IServices.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="PlatformService.cs" />

@@ -11,16 +11,11 @@ namespace runmu.Business
     {
         private static string selectAllSql = "SELECT ID, name as '姓名' ,qq as 'QQ', alias as '昵称',email FROM teacher";
         private static string updateSql = @"UPDATE teacher set name = @name, alias = @alias, qq = @qq, email = @email, 
-                                            lastModifiedTime = @date WHERE ID = @id;";
+                                            updateTime = @date WHERE ID = @id;";
         private static string insertSql = @"INSERT INTO `teacher`
-                                           (`name`,`alias`,`qq`,`email`,`createdTime`,`lastModifiedTime`) VALUES 
+                                           (`name`,`alias`,`qq`,`email`,`createdTime`,`updateTime`) VALUES 
                                            (@name, @alias, @qq, @email, @date, @date);";
 
-
-        public override DataTable Query(SQLiteConnection conn, object id)
-        {
-            throw new NotImplementedException();
-        }
 
         public override bool Update(SQLiteConnection conn, DataTable table)
         {
@@ -58,17 +53,37 @@ namespace runmu.Business
 
         protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
         {
-            return BuildDefaultParams(values);
+            return BuildDefaultOperateParams(values);
         }
 
-        protected override string InsertSql()
+        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetInsertSql()
         {
             return insertSql;
         }
 
-        protected override string SelectAllSql()
+        protected override string QuerySql(Dictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetQuerySql()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetSelectAllSql()
         {
             return selectAllSql;
+        }
+
+        protected override string TableName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -57,15 +57,16 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.添加信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teacherMgmt = new System.Windows.Forms.ToolStripMenuItem();
-            this.courseMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.studentsMgmt = new System.Windows.Forms.ToolStripMenuItem();
-            this.signUpMgmt = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmAssistant = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmPlatform = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAssistant = new System.Windows.Forms.ToolStripMenuItem();
+            this.courseMgmt = new System.Windows.Forms.ToolStripMenuItem();
+            this.signUpMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.系统设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.paymentMgmt = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -313,11 +314,12 @@
             // 
             this.添加信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.teacherMgmt,
-            this.courseMgmt,
             this.studentsMgmt,
-            this.signUpMgmt,
+            this.tsmPlatform,
             this.tsmAssistant,
-            this.tsmPlatform});
+            this.courseMgmt,
+            this.signUpMgmt,
+            this.paymentMgmt});
             this.添加信息ToolStripMenuItem.Name = "添加信息ToolStripMenuItem";
             this.添加信息ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.添加信息ToolStripMenuItem.Text = "信息管理";
@@ -330,13 +332,6 @@
             this.teacherMgmt.Text = "教师管理";
             this.teacherMgmt.Click += new System.EventHandler(this.TeacherMgmt_Click);
             // 
-            // courseMgmt
-            // 
-            this.courseMgmt.Name = "courseMgmt";
-            this.courseMgmt.Size = new System.Drawing.Size(180, 22);
-            this.courseMgmt.Text = "课程管理";
-            this.courseMgmt.Click += new System.EventHandler(this.CourseMgmt_Click);
-            // 
             // studentsMgmt
             // 
             this.studentsMgmt.Name = "studentsMgmt";
@@ -344,12 +339,12 @@
             this.studentsMgmt.Text = "学员管理";
             this.studentsMgmt.Click += new System.EventHandler(this.StudentsMgmt_Click);
             // 
-            // signUpMgmt
+            // tsmPlatform
             // 
-            this.signUpMgmt.Name = "signUpMgmt";
-            this.signUpMgmt.Size = new System.Drawing.Size(180, 22);
-            this.signUpMgmt.Text = "报名管理";
-            this.signUpMgmt.Click += new System.EventHandler(this.SignUpMgmt_Click);
+            this.tsmPlatform.Name = "tsmPlatform";
+            this.tsmPlatform.Size = new System.Drawing.Size(180, 22);
+            this.tsmPlatform.Text = "平台管理";
+            this.tsmPlatform.Click += new System.EventHandler(this.TsmPlatform_Click);
             // 
             // tsmAssistant
             // 
@@ -358,12 +353,19 @@
             this.tsmAssistant.Text = "助理管理";
             this.tsmAssistant.Click += new System.EventHandler(this.TsmAssistant_Click);
             // 
-            // tsmPlatform
+            // courseMgmt
             // 
-            this.tsmPlatform.Name = "tsmPlatform";
-            this.tsmPlatform.Size = new System.Drawing.Size(180, 22);
-            this.tsmPlatform.Text = "平台管理";
-            this.tsmPlatform.Click += new System.EventHandler(this.TsmPlatform_Click);
+            this.courseMgmt.Name = "courseMgmt";
+            this.courseMgmt.Size = new System.Drawing.Size(180, 22);
+            this.courseMgmt.Text = "课程管理";
+            this.courseMgmt.Click += new System.EventHandler(this.CourseMgmt_Click);
+            // 
+            // signUpMgmt
+            // 
+            this.signUpMgmt.Name = "signUpMgmt";
+            this.signUpMgmt.Size = new System.Drawing.Size(180, 22);
+            this.signUpMgmt.Text = "报名管理";
+            this.signUpMgmt.Click += new System.EventHandler(this.SignUpMgmt_Click);
             // 
             // 系统设置ToolStripMenuItem
             // 
@@ -391,6 +393,13 @@
             // 
             this.openFileDialog1.FileName = "openFile";
             // 
+            // paymentMgmt
+            // 
+            this.paymentMgmt.Name = "paymentMgmt";
+            this.paymentMgmt.Size = new System.Drawing.Size(180, 22);
+            this.paymentMgmt.Text = "学费管理";
+            this.paymentMgmt.Click += new System.EventHandler(this.PaymentMgmt_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,6 +418,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "小仙女专用 v1.0  by 噢不";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -458,6 +468,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem tsmAssistant;
         private System.Windows.Forms.ToolStripMenuItem tsmPlatform;
+        private System.Windows.Forms.ToolStripMenuItem paymentMgmt;
     }
 }
 

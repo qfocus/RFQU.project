@@ -9,29 +9,14 @@ namespace runmu.Business
 {
     public class StudentsService : Service
     {
-        private static string selectAllSql = "select ID,name as '姓名',qq as 'QQ',wechat as '微信', phone as '电话',email from students;";
+        private static string selectAllSql = "select ID,ID as 'QQ', name as '姓名',wechat as '微信', phone as '电话',email from students;";
         private static string insertSql = @"INSERT INTO `students`
-                                         (`name`,`qq`,`email`,`phone`,`weChat`,`createdTime`,`lastModifiedTime`) VALUES
-                                         (@name, @qq, @email, @phone, @weChat, @date, @date);";
+                                         (`id`,`name`,`email`,`phone`,`weChat`,`createdTime`,`updateTime`) VALUES
+                                         (@ID, @name, @email, @phone, @weChat, @date, @date);";
         private static string updateSql = @"UPDATE students set name = @name, email = @email, phone = @phone, wechat = @wechat,
-                                            lastModifiedTime = @date WHERE ID = @id;";
+                                            updateTime = @date WHERE ID = @id;";
 
-        private static string querySql = @"SELECT ID, name from students WHERE QQ = @qq;";
-
-
-
-
-        public override DataTable Query(SQLiteConnection conn, object id)
-        {
-            DateTime now = DateTime.Now;
-            SQLiteCommand cmd = new SQLiteCommand(querySql, conn);
-            cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@qq", Value = id, DbType = DbType.Int32 });
-            DataTable table = new DataTable();
-            SQLiteDataAdapter adp = new SQLiteDataAdapter(cmd);
-            adp.Fill(table);
-
-            return table;
-        }
+        private static string querySql = @"SELECT ID, name from students WHERE ";
 
         public override bool Update(SQLiteConnection conn, DataTable table)
         {
@@ -46,7 +31,7 @@ namespace runmu.Business
                 }
 
                 int id = Convert.ToInt32(row[0]);
-                string name = row[1].ToString();
+                string name = row[2].ToString();
                 object wechat = row[3];
                 object phone = row[4];
                 object email = row[5];
@@ -70,17 +55,32 @@ namespace runmu.Business
 
         protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
         {
-            return BuildDefaultParams(values);
+            return BuildDefaultOperateParams(values);
         }
 
-        protected override string InsertSql()
+        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+        {
+            return BuildDefaultParams(values).ToArray();
+        }
+
+        protected override string GetInsertSql()
         {
             return insertSql;
         }
 
-        protected override string SelectAllSql()
+        protected override string GetQuerySql()
+        {
+            return querySql;
+        }
+
+        protected override string GetSelectAllSql()
         {
             return selectAllSql;
+        }
+
+        protected override string TableName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -39,11 +39,11 @@ namespace runmu
 
             Dictionary<string, object> paras = new Dictionary<string, object>
             {
-                { PropertyName.NAME, txtName.Text.Trim() },
-                { PropertyName.QQ,txtQQ.Text },
-                { PropertyName.Phone,txtPhone.Text},
-                { PropertyName.Wechat,txtWechat.Text},
-                { PropertyName.Email,txtEmail.Text}
+                { AttributeName.NAME, txtName.Text.Trim() },
+                { AttributeName.ID,txtQQ.Text },
+                { AttributeName.Phone,txtPhone.Text},
+                { AttributeName.Wechat,txtWechat.Text},
+                { AttributeName.Email,txtEmail.Text}
             };
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
@@ -59,9 +59,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    Logger.Error(error);
-                    MessageBox.Show("出问题了，快去找大师兄！\r" + error.Message, "噢不！", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                    return;
+                    FormCommon.HandleException(error);
                 }
 
             }
@@ -82,7 +80,8 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
+                    this.Dispose();
                 }
             }
         }
@@ -115,7 +114,7 @@ namespace runmu
                 }
                 catch (Exception error)
                 {
-                    FormCommon.HandleError(error);
+                    FormCommon.HandleException(error);
                 }
             }
         }
