@@ -10,6 +10,7 @@ namespace runmu.Business
         public static string DBCONN = "Data Source = runmu.db; Version=3;";
         public static string LONG_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
         public static string SHORT_DATE_FORMAT = "yyyy-MM-dd";
+        public static string TIME_STAMP_FORMAT = "";
         public static string PAID = "已支付";
         public static string UNPAID = "未支付";
         public static string FULL = "全额";

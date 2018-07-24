@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssistantService.cs" />
+    <Compile Include="Args.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ContainerBootstrapper.cs" />
     <Compile Include="CourseService.cs" />

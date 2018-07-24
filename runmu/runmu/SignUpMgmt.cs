@@ -110,9 +110,7 @@ namespace runmu
                 try
                 {
                     conn.Open();
-                    DataTable table = studentService.Query(conn, new Dictionary<string, object>()
-                    { { AttributeName.ID, txtQQ.Text.Trim() }
-                    });
+                    DataTable table = studentService.Query(conn, new Args(AttributeName.ID, txtQQ.Text.Trim()));
 
                     if (table.Rows.Count == 0)
                     {
@@ -162,10 +160,10 @@ namespace runmu
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 conn.Open();
-                Dictionary<string, object> queryArgs = new Dictionary<string, object>
+                Args[] queryArgs = new Args[]
                 {
-                    { AttributeName.CourseID, cmbCourse.SelectedValue },
-                    { AttributeName.StudentID, qq }
+                    new Args(AttributeName.CourseID, cmbCourse.SelectedValue),
+                    new Args(AttributeName.StudentID, qq)
                 };
 
                 DataTable signed = signService.Query(conn, queryArgs);
@@ -180,9 +178,7 @@ namespace runmu
                     return;
                 }
 
-                queryArgs.Remove(AttributeName.CourseID);
-
-                signed = signService.Query(conn, queryArgs);
+                signed = signService.Query(conn, queryArgs[1]);
 
                 bool hasSigned = false;
 
@@ -203,17 +199,18 @@ namespace runmu
                 }
 
                 DateTime end = start.AddYears(length).AddDays(1);
-                Dictionary<string, object> insertParams = new Dictionary<string, object>
+                long expire = Common.GetTimeStamp();
+                Args[] insertParams = new Args[]
                 {
-                    { AttributeName.CourseID, cmbCourse.SelectedValue },
-                    { AttributeName.StudentID, qq },
-                    { AttributeName.AssistantID, cmbAssistant.SelectedValue },
-                    { AttributeName.PlatformID, cmbPlatform.SelectedValue },
-                    { AttributeName.SignDate, signDateString },
-                    { AttributeName.LearnStatus, 1 },
-                    { AttributeName.PayType, cmbPayment.SelectedItem },
-                    { AttributeName.EndDate, end.ToString(Constants.SHORT_DATE_FORMAT)},
-                    { AttributeName.EndDateTicks,end.Ticks}
+                    new Args( AttributeName.CourseID, cmbCourse.SelectedValue ),
+                    new Args( AttributeName.StudentID, qq ),
+                    new Args( AttributeName.AssistantID, cmbAssistant.SelectedValue ),
+                    new Args( AttributeName.PlatformID, cmbPlatform.SelectedValue ),
+                    new Args( AttributeName.SignDate, signDateString ),
+                    new Args( AttributeName.LearnStatus, 1 ),
+                    new Args( AttributeName.PayType, cmbPayment.SelectedItem ),
+                    new Args( AttributeName.ExpireDate, end.ToString(Constants.SHORT_DATE_FORMAT)),
+                    new Args( AttributeName.Expire,expire)
                 };
 
                 SQLiteTransaction transaction = conn.BeginTransaction();
@@ -224,25 +221,13 @@ namespace runmu
                     //更新指导期
                     if (hasSigned)
                     {
-                        List<string> conditions = new List<string>
+                        List<Args> attributes = new List<Args>
                         {
-                            AttributeName.StudentID
+                            new Args( AttributeName.ExpireDate,end.ToString(Constants.SHORT_DATE_FORMAT)),
+                            new Args( AttributeName.Expire,expire)
                         };
 
-                        List<string> attributes = new List<string>
-                        {
-                            AttributeName.EndDate,
-                            AttributeName.EndDateTicks
-                        };
-
-                        Dictionary<string, object> updateParams = new Dictionary<string, object>
-                        {
-                            { AttributeName.EndDate, end.ToString(Constants.SHORT_DATE_FORMAT) },
-                            { AttributeName.StudentID, qq },
-                            { AttributeName.EndDateTicks,end.Ticks}
-                        };
-
-                        signService.Update(conn, attributes, conditions, updateParams);
+                        signService.Update(conn, attributes, new Args(AttributeName.StudentID, qq));
                     }
 
                     AddPayment(conn, qq, period, downPayment);
@@ -267,16 +252,14 @@ namespace runmu
             // full pay
             if (cmbPayment.SelectedIndex == 0)
             {
-                Dictionary<string, object> args = new Dictionary<string, object>
-                        {
-                            { AttributeName.CourseID, cmbCourse.SelectedValue },
-                            { AttributeName.StudentID, qq },
-                            { AttributeName.PayType,Constants.FULL },
-                            { AttributeName.Status, Constants.PAID },
-                            { AttributeName.Values, price},
-                            { AttributeName.PayDate,signDate.ToString(Constants.SHORT_DATE_FORMAT)},
-                            { AttributeName.EndDate, signDate.Ticks}
-                        };
+                Args[] args = new Args[]{
+                  new Args(AttributeName.CourseID, cmbCourse.SelectedValue ),
+                  new Args(AttributeName.StudentID, qq ),
+                  new Args(AttributeName.PayType,Constants.FULL ),
+                  new Args(AttributeName.Status, Constants.PAID ),
+                  new Args(AttributeName.Values, price),
+                  new Args(AttributeName.PayDate,signDate.ToString(Constants.SHORT_DATE_FORMAT)),
+                  new Args(AttributeName.Expire,Common.GetTimeStamp(signDate))};
                 paymentService.Add(conn, args);
                 return;
             }
@@ -284,42 +267,42 @@ namespace runmu
             double rest = price - downPayment;
             double eachPrice = rest / period;
 
-            Dictionary<string, object> paymentParas = new Dictionary<string, object>();
+            List<Args> paymentParas = new List<Args>();
 
             for (int i = 0; i <= period; i++)
             {
-                paymentParas.Add(AttributeName.CourseID, cmbCourse.SelectedValue);
-                paymentParas.Add(AttributeName.StudentID, qq);
+                paymentParas.Add(new Args(AttributeName.CourseID, cmbCourse.SelectedValue));
+                paymentParas.Add(new Args(AttributeName.StudentID, qq));
                 if (i == 0)
                 {
-                    paymentParas.Add(AttributeName.PayType, Constants.DOWN_PAYMENT);
-                    paymentParas.Add(AttributeName.Values, downPayment);
-                    paymentParas.Add(AttributeName.Status, Constants.PAID);
-                    paymentParas.Add(AttributeName.PayDate, signDate.ToString(Constants.SHORT_DATE_FORMAT));
-                    paymentParas.Add(AttributeName.EndDate, signDate.Ticks);
-                    paymentService.Add(conn, paymentParas);
+                    paymentParas.Add(new Args(AttributeName.PayType, Constants.DOWN_PAYMENT));
+                    paymentParas.Add(new Args(AttributeName.Values, downPayment));
+                    paymentParas.Add(new Args(AttributeName.Status, Constants.PAID));
+                    paymentParas.Add(new Args(AttributeName.PayDate, signDate.ToString(Constants.SHORT_DATE_FORMAT)));
+                    paymentParas.Add(new Args(AttributeName.Expire, Common.GetTimeStamp(signDate)));
+                    paymentService.Add(conn, paymentParas.ToArray());
                     paymentParas.Clear();
                     continue;
                 }
 
                 if (i == 1)
                 {
-                    paymentParas.Add(AttributeName.Status, Constants.PAID);
-                    paymentParas.Add(AttributeName.PayDate, signDate.ToString(Constants.SHORT_DATE_FORMAT));
-                    paymentParas.Add(AttributeName.EndDate, signDate.Ticks);
+                    paymentParas.Add(new Args(AttributeName.Status, Constants.PAID));
+                    paymentParas.Add(new Args(AttributeName.PayDate, signDate.ToString(Constants.SHORT_DATE_FORMAT)));
+                    paymentParas.Add(new Args(AttributeName.Expire, Common.GetTimeStamp(signDate)));
                 }
                 else
                 {
                     DateTime periodDate = signDate.AddMonths(i - 1);
-                    paymentParas.Add(AttributeName.Status, Constants.UNPAID);
-                    paymentParas.Add(AttributeName.PayDate, periodDate.ToString(Constants.SHORT_DATE_FORMAT));
-                    paymentParas.Add(AttributeName.EndDate, periodDate.Ticks);
+                    paymentParas.Add(new Args(AttributeName.Status, Constants.UNPAID));
+                    paymentParas.Add(new Args(AttributeName.PayDate, periodDate.ToString(Constants.SHORT_DATE_FORMAT)));
+                    paymentParas.Add(new Args(AttributeName.Expire, Common.GetTimeStamp(periodDate)));
                 }
 
-                paymentParas.Add(AttributeName.Values, eachPrice);
-                paymentParas.Add(AttributeName.PayType, string.Format(Constants.NO_, i));
+                paymentParas.Add(new Args(AttributeName.Values, eachPrice));
+                paymentParas.Add(new Args(AttributeName.PayType, string.Format(Constants.NO_, i)));
 
-                paymentService.Add(conn, paymentParas);
+                paymentService.Add(conn, paymentParas.ToArray());
                 paymentParas.Clear();
             }
 
@@ -353,8 +336,6 @@ namespace runmu
 
                 lblPrice.Text = coursePrices[id].ToString();
             }
-
-
         }
 
         private void btnQuery_Click(object sender, EventArgs e)

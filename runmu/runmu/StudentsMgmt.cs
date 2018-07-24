@@ -37,13 +37,12 @@ namespace runmu
                 return;
             }
 
-            Dictionary<string, object> paras = new Dictionary<string, object>
-            {
-                { AttributeName.NAME, txtName.Text.Trim() },
-                { AttributeName.ID,txtQQ.Text },
-                { AttributeName.Phone,txtPhone.Text},
-                { AttributeName.Wechat,txtWechat.Text},
-                { AttributeName.Email,txtEmail.Text}
+            Args[] paras = new Args[]
+            {   new Args(AttributeName.NAME, txtName.Text.Trim()),
+                new Args(AttributeName.ID,txtQQ.Text ),
+                new Args(AttributeName.Phone,txtPhone.Text),
+                new Args(AttributeName.Wechat,txtWechat.Text),
+                new Args(AttributeName.Email,txtEmail.Text)
             };
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))

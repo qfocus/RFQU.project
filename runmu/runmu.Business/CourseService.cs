@@ -31,7 +31,7 @@ namespace runmu.Business
                     continue;
                 }
                 int id = Convert.ToInt32(row[0]);
-                string name = row[2].ToString();
+                string name = row[1].ToString();
                 double price = Convert.ToDouble(row[3]);
                 SQLiteCommand cmd = new SQLiteCommand(updateSql, conn);
                 cmd.Parameters.Add(new SQLiteParameter() { ParameterName = "@id", Value = id, DbType = DbType.Int32 });
@@ -46,12 +46,13 @@ namespace runmu.Business
             return true;
         }
 
-        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
         {
             return BuildDefaultOperateParams(values);
         }
 
-        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+
+        protected override SQLiteParameter[] BuildQueryParameters(params Args[] values)
         {
             throw new NotImplementedException();
         }
@@ -62,10 +63,6 @@ namespace runmu.Business
         }
 
 
-        protected override string QuerySql(Dictionary<string, object> values)
-        {
-            throw new NotImplementedException();
-        }
 
         protected override string GetQuerySql()
         {

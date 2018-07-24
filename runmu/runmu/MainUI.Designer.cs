@@ -62,11 +62,12 @@
             this.tsmAssistant = new System.Windows.Forms.ToolStripMenuItem();
             this.courseMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.signUpMgmt = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentMgmt = new System.Windows.Forms.ToolStripMenuItem();
             this.系统设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.paymentMgmt = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateMgmt = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -319,7 +320,8 @@
             this.tsmAssistant,
             this.courseMgmt,
             this.signUpMgmt,
-            this.paymentMgmt});
+            this.paymentMgmt,
+            this.dateMgmt});
             this.添加信息ToolStripMenuItem.Name = "添加信息ToolStripMenuItem";
             this.添加信息ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.添加信息ToolStripMenuItem.Text = "信息管理";
@@ -367,6 +369,13 @@
             this.signUpMgmt.Text = "报名管理";
             this.signUpMgmt.Click += new System.EventHandler(this.SignUpMgmt_Click);
             // 
+            // paymentMgmt
+            // 
+            this.paymentMgmt.Name = "paymentMgmt";
+            this.paymentMgmt.Size = new System.Drawing.Size(180, 22);
+            this.paymentMgmt.Text = "学费管理";
+            this.paymentMgmt.Click += new System.EventHandler(this.PaymentMgmt_Click);
+            // 
             // 系统设置ToolStripMenuItem
             // 
             this.系统设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -393,12 +402,12 @@
             // 
             this.openFileDialog1.FileName = "openFile";
             // 
-            // paymentMgmt
+            // dateMgmt
             // 
-            this.paymentMgmt.Name = "paymentMgmt";
-            this.paymentMgmt.Size = new System.Drawing.Size(180, 22);
-            this.paymentMgmt.Text = "学费管理";
-            this.paymentMgmt.Click += new System.EventHandler(this.PaymentMgmt_Click);
+            this.dateMgmt.Name = "dateMgmt";
+            this.dateMgmt.Size = new System.Drawing.Size(180, 22);
+            this.dateMgmt.Text = "指导期管理";
+            this.dateMgmt.Click += new System.EventHandler(this.dateMgmt_Click);
             // 
             // Form1
             // 
@@ -469,6 +478,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmAssistant;
         private System.Windows.Forms.ToolStripMenuItem tsmPlatform;
         private System.Windows.Forms.ToolStripMenuItem paymentMgmt;
+        private System.Windows.Forms.ToolStripMenuItem dateMgmt;
     }
 }
 

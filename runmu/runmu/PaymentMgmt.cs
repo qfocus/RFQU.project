@@ -73,17 +73,17 @@ namespace runmu
                 {
                     conn.Open();
                     Dictionary<string, object> paras = new Dictionary<string, object>();
-
+                    Args args = null;
                     if (!string.IsNullOrWhiteSpace(txtQQ.Text))
                     {
-                        paras.Add(AttributeName.StudentID, txtQQ.Text.Trim());
+                        args = new Args(AttributeName.StudentID, txtQQ.Text.Trim());
                     }
                     if (cmbCourses.SelectedIndex != 0)
                     {
-                        paras.Add(AttributeName.CourseID, cmbCourses.SelectedValue);
+                        args = new Args(AttributeName.CourseID, cmbCourses.SelectedValue);
                     }
 
-                    DataTable result = service.Query(conn, paras);
+                    DataTable result = service.Query(conn, args);
 
                     dataContainer.DataSource = result;
                     ChangeStatus();
@@ -105,9 +105,9 @@ namespace runmu
         {
             foreach (DataGridViewRow row in dataContainer.Rows)
             {
-                if (Constants.UNPAID.Equals(row.Cells[6].Value))
+                if (Constants.PAID.Equals(row.Cells[6].Value))
                 {
-                    row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#32CD32");
+                    row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#8E8E8E");
                 }
 
             }
@@ -131,19 +131,9 @@ namespace runmu
                 return;
             }
 
-            List<string> attributes = new List<string>
+            List<Args> attributes = new List<Args>
             {
-                AttributeName.Status
-            };
-            List<string> conditions = new List<string>
-            {
-                AttributeName.ID
-            };
-
-            Dictionary<string, object> values = new Dictionary<string, object>
-            {
-                { AttributeName.ID, senderGrid.Rows[e.RowIndex].Cells[0].Value },
-                { AttributeName.Status, Constants.PAID}
+               new Args(AttributeName.Status,Constants.PAID)
             };
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
@@ -151,7 +141,7 @@ namespace runmu
                 try
                 {
                     conn.Open();
-                    service.Update(conn, attributes, conditions, values);
+                    service.Update(conn, attributes, new Args(AttributeName.ID, senderGrid.Rows[e.RowIndex].Cells[0].Value));
                     RefreshData(conn);
                     MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

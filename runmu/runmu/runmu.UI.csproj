@@ -151,6 +151,12 @@
       <DependentUpon>CourseMgmt.cs</DependentUpon>
     </Compile>
     <Compile Include="FormCommon.cs" />
+    <Compile Include="HibernateMgmt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HibernateMgmt.Designer.cs">
+      <DependentUpon>HibernateMgmt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Importer.cs" />
     <Compile Include="Initailizer.cs" />
     <Compile Include="Logger.cs" />
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CourseMgmt.resx">
       <DependentUpon>CourseMgmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HibernateMgmt.resx">
+      <DependentUpon>HibernateMgmt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>

@@ -27,7 +27,7 @@ namespace runmu.Business
         public static string Values = "values";
         public static string Status = "status";
         public static string PayDate = "payDate";
-        public static string EndDate = "endDate";
-        public static string EndDateTicks = "endDateTick";
+        public static string ExpireDate = "expireDate";
+        public static string Expire = "expire";
     }
 }

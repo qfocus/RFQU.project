@@ -44,7 +44,7 @@ namespace runmu.Business
             return insertSql;
         }
 
-        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
         {
             return BuildDefaultOperateParams(values);
         }
@@ -55,11 +55,6 @@ namespace runmu.Business
         }
 
 
-        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override string GetQuerySql()
         {
             throw new NotImplementedException();
@@ -68,6 +63,11 @@ namespace runmu.Business
         protected override string TableName()
         {
             return tableName;
+        }
+
+        protected override SQLiteParameter[] BuildQueryParameters(params Args[] values)
+        {
+            throw new NotImplementedException();
         }
     }
 }

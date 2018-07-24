@@ -88,11 +88,11 @@ namespace runmu
                 return;
             }
 
-            Dictionary<string, object> paras = new Dictionary<string, object>
+            Args[] paras = new Args[]
             {
-                { AttributeName.NAME, txtCourse.Text.Trim() },
-                { AttributeName.Price, price },
-                { AttributeName.TeacherID, cmbTeacher.SelectedValue }
+                new Args(AttributeName.NAME, txtCourse.Text.Trim() ),
+                new Args( AttributeName.Price, price ),
+                new Args( AttributeName.TeacherID, cmbTeacher.SelectedValue )
             };
 
 

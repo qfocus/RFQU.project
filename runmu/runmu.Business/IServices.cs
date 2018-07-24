@@ -12,11 +12,11 @@ namespace runmu.Business
 
         DataTable GetAll(SQLiteConnection conn);
         Dictionary<int, string> GetNames(SQLiteConnection conn);
-        DataTable Query(SQLiteConnection conn, Dictionary<string, object> values);
+        DataTable Query(SQLiteConnection conn, params Args[] values);
         DataTable MutiplyQuery(SQLiteConnection conn, Dictionary<string, object> values);
         bool Update(SQLiteConnection conn, DataTable item);
-        bool Update(SQLiteConnection conn, List<string> attributes, List<string> conditions, Dictionary<string, object> values);
+        bool Update(SQLiteConnection conn, List<Args> attributes, params Args[] conditions);
         bool Delete(SQLiteConnection conn, List<int> ids);
-        void Add(SQLiteConnection conn, Dictionary<string, object> values);
+        void Add(SQLiteConnection conn, params Args[] values);
     }
 }

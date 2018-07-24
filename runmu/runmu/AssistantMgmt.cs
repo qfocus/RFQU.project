@@ -68,18 +68,12 @@ namespace runmu
                 return;
             }
 
-
-            Dictionary<string, object> paras = new Dictionary<string, object>
-            {
-                { AttributeName.NAME, txtName.Text.Trim() }
-            };
-
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 try
                 {
                     conn.Open();
-                    service.Add(conn, paras);
+                    service.Add(conn, new Args(AttributeName.NAME, txtName.Text.Trim()));
                     RefreshData(conn);
 
                     MessageBox.Show("厉害喽！ 居然成功了！", "恭喜！", MessageBoxButtons.OK, MessageBoxIcon.Information);

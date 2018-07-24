@@ -53,15 +53,16 @@ namespace runmu.Business
             return true;
         }
 
-        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
         {
             return BuildDefaultOperateParams(values);
         }
 
-        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+        protected override SQLiteParameter[] BuildQueryParameters(params Args[] values)
         {
             return BuildDefaultParams(values).ToArray();
         }
+
 
         protected override string GetInsertSql()
         {

@@ -44,7 +44,7 @@ namespace runmu
                 paras.Add(AttributeName.Phone, 100000);
                 paras.Add(AttributeName.Wechat, "");
                 paras.Add(AttributeName.Email, "");
-                service.Add(conn, paras);
+                //service.Add(conn, paras);
                 paras.Clear();
             }
         }

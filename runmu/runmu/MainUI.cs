@@ -15,14 +15,27 @@ namespace runmu
         StudentsService studentsService;
         CourseService courseService;
         TeacherService teacherService;
-
+        Timer timer;
         public Form1(IUnityContainer container)
         {
             this.container = container;
             this.studentsService = container.Resolve<StudentsService>();
             this.courseService = container.Resolve<CourseService>();
             this.teacherService = container.Resolve<TeacherService>();
+
             InitializeComponent();
+
+            this.timer = new Timer();
+            this.timer.Tick += Timer_Tick;
+            this.timer.Interval = 5000;
+            this.timer.Start();
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            long expired = DateTime.Now.AddMonths(1).Ticks;
+            Args args = new Args(AttributeName.Expire, "<=", expired);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -163,6 +176,12 @@ namespace runmu
         private void PaymentMgmt_Click(object sender, EventArgs e)
         {
             PaymentMgmt payment = new PaymentMgmt(container);
+            payment.ShowDialog();
+        }
+
+        private void dateMgmt_Click(object sender, EventArgs e)
+        {
+            HibernateMgmt payment = new HibernateMgmt(container);
             payment.ShowDialog();
         }
     }

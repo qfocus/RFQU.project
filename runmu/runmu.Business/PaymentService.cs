@@ -14,9 +14,9 @@ namespace runmu.Business
         private static string tableName = "`payment`";
         private static string insertSql =
             @"insert into `payment`
-            (`courseID`,`studentID`,`payType`,`values`,`status`,`payDate`,`endDate`, updateTime,createdTime)
+            (`courseID`,`studentID`,`payType`,`values`,`status`,`payDate`,`expire`, updateTime, createdTime)
             values
-            (@courseID, @studentID, @payType, @values, @status, @payDate, @endDate, @date, @date)";
+            (@courseID, @studentID, @payType, @values, @status, @payDate, @expire, @date, @date)";
 
         private static string selectAllSql =
             @"select p.ID, s.ID, c.name as '课程',s.name as '学员', p.payType as '类型' , p.`values` as '金额', p.status as '状态',p.payDate as '日期' from payment as p
@@ -30,18 +30,18 @@ namespace runmu.Business
         }
 
 
-        public override DataTable Query(SQLiteConnection conn, Dictionary<string, object> values)
+        public override DataTable Query(SQLiteConnection conn, params Args[] values)
         {
             StringBuilder builder = new StringBuilder(selectAllSql);
             List<String> querys = new List<string>();
 
             foreach (var item in values)
             {
-                if (item.Key == AttributeName.StudentID)
+                if (item.Name == AttributeName.StudentID)
                 {
                     querys.Add(" s.ID = @studentID ");
                 }
-                if (item.Key == AttributeName.CourseID)
+                if (item.Name == AttributeName.CourseID)
                 {
                     querys.Add(" c.ID = @courseID ");
                 }
@@ -62,8 +62,6 @@ namespace runmu.Business
                 builder.Remove(builder.Length - 5, 5);
             }
 
-
-
             List<SQLiteParameter> paras = BuildDefaultParams(values);
 
             SQLiteCommand cmd = new SQLiteCommand(builder.ToString(), conn);
@@ -77,12 +75,12 @@ namespace runmu.Business
 
         }
 
-        protected override SQLiteParameter[] BuildInsertParameters(Dictionary<string, object> values)
+        protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
         {
             return BuildDefaultOperateParams(values);
         }
 
-        protected override SQLiteParameter[] BuildQueryParameters(Dictionary<string, object> values)
+        protected override SQLiteParameter[] BuildQueryParameters(params Args[] values)
         {
             throw new NotImplementedException();
         }
@@ -92,10 +90,6 @@ namespace runmu.Business
             return insertSql;
         }
 
-        protected override string QuerySql(Dictionary<string, object> values)
-        {
-            throw new NotImplementedException();
-        }
 
         protected override string GetQuerySql()
         {
