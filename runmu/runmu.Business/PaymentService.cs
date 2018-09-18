@@ -24,65 +24,60 @@ namespace runmu.Business
             join students as s on p.studentID = s.ID";
 
 
+        private static readonly Dictionary<string, string> mapping = new Dictionary<string, string>() {
+            { AttributeName.StudentID,"s.ID" },
+            { AttributeName.CourseID, "c.ID"}
+        };
+
         public override bool Update(SQLiteConnection conn, DataTable table)
         {
             throw new NotImplementedException();
         }
 
 
-        public override DataTable Query(SQLiteConnection conn, params Args[] values)
-        {
-            StringBuilder builder = new StringBuilder(selectAllSql);
-            List<String> querys = new List<string>();
 
-            foreach (var item in values)
+        protected override SQLiteParameter[] BuildInsertParameters(params Args[] conditions)
+        {
+            return BuildParamsWithDate(conditions);
+        }
+
+        protected override SQLiteParameter[] BuildQueryParameters(params Args[] conditions)
+        {
+            return BuildDefaultParams(conditions).ToArray();
+        }
+
+        protected override string BuildQuerySql(params Args[] conditions)
+        {
+            if (conditions == null || conditions.Length == 0 || conditions[0] == null)
             {
-                if (item.Name == AttributeName.StudentID)
-                {
-                    querys.Add(" s.ID = @studentID ");
-                }
-                if (item.Name == AttributeName.CourseID)
-                {
-                    querys.Add(" c.ID = @courseID ");
-                }
+                return selectAllSql;
             }
 
-            for (int i = 0; i < querys.Count; i++)
+
+            StringBuilder builder = new StringBuilder(selectAllSql);
+            builder.Append(" WHERE ");
+
+            foreach (var item in conditions)
             {
-                if (i == 0)
+                string name = item.Name;
+                if (mapping.ContainsKey(name))
                 {
-                    builder.Append(" WHERE ");
+                    name = mapping[name];
                 }
-                builder.Append(querys[i]);
+                builder.Append(name);
+                builder.Append(" ");
+                builder.Append(item.Condition);
+                builder.Append(" @");
+                builder.Append(item.Name);
                 builder.Append(" and ");
             }
 
-            if (querys.Count > 0)
+            if (conditions != null && conditions.Length > 0)
             {
                 builder.Remove(builder.Length - 5, 5);
             }
 
-            List<SQLiteParameter> paras = BuildDefaultParams(values);
-
-            SQLiteCommand cmd = new SQLiteCommand(builder.ToString(), conn);
-            cmd.Parameters.AddRange(paras.ToArray());
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-
-            DataTable result = new DataTable();
-            adapter.Fill(result);
-
-            return result;
-
-        }
-
-        protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
-        {
-            return BuildDefaultOperateParams(values);
-        }
-
-        protected override SQLiteParameter[] BuildQueryParameters(params Args[] values)
-        {
-            throw new NotImplementedException();
+            return builder.ToString();
         }
 
         protected override string GetInsertSql()
@@ -93,7 +88,7 @@ namespace runmu.Business
 
         protected override string GetQuerySql()
         {
-            throw new NotImplementedException();
+            return selectAllSql;
         }
 
         protected override string GetSelectAllSql()

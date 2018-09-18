@@ -14,8 +14,8 @@ namespace runmu.Business
         protected abstract string GetInsertSql();
         protected abstract string GetQuerySql();
         protected abstract string TableName();
-        protected abstract SQLiteParameter[] BuildInsertParameters(params Args[] values);
-        protected abstract SQLiteParameter[] BuildQueryParameters(params Args[] values);
+        protected abstract SQLiteParameter[] BuildInsertParameters(params Args[] conditions);
+        protected abstract SQLiteParameter[] BuildQueryParameters(params Args[] conditions);
         public abstract bool Update(SQLiteConnection conn, DataTable table);
 
 
@@ -57,10 +57,10 @@ namespace runmu.Business
             return result;
         }
 
-        public virtual DataTable Query(SQLiteConnection conn, params Args[] values)
+        public virtual DataTable Query(SQLiteConnection conn, params Args[] conditions)
         {
-            string sql = QuerySql(values);
-            SQLiteParameter[] parameters = BuildQueryParameters(values);
+            string sql = BuildQuerySql(conditions);
+            SQLiteParameter[] parameters = BuildQueryParameters(conditions);
             SQLiteCommand cmd = new SQLiteCommand(sql, conn);
             cmd.Parameters.AddRange(parameters);
 
@@ -72,7 +72,7 @@ namespace runmu.Business
             return result;
         }
 
-        public virtual DataTable MutiplyQuery(SQLiteConnection conn, Dictionary<string, object> values)
+        public virtual DataTable MutiplyQuery(SQLiteConnection conn, params Args[] values)
         {
             return new DataTable();
         }
@@ -83,19 +83,25 @@ namespace runmu.Business
             throw new NotImplementedException();
         }
 
-        protected virtual SQLiteParameter[] BuildDefaultOperateParams(params Args[] values)
+        protected virtual SQLiteParameter[] BuildParamsWithDate(params Args[] conditions)
         {
-            List<SQLiteParameter> list = BuildDefaultParams(values);
+            List<SQLiteParameter> list = BuildDefaultParams(conditions);
             list.Add(new SQLiteParameter("@date", DateTime.Now.ToString()));
 
             return list.ToArray();
         }
 
 
-        protected List<SQLiteParameter> BuildDefaultParams(params Args[] values)
+        protected List<SQLiteParameter> BuildDefaultParams(params Args[] conditions)
         {
             List<SQLiteParameter> list = new List<SQLiteParameter>();
-            foreach (var item in values)
+            if (conditions == null || conditions.Length == 0 || conditions[0] == null)
+            {
+                return list;
+            }
+
+
+            foreach (var item in conditions)
             {
                 list.Add(new SQLiteParameter()
                 {
@@ -107,13 +113,24 @@ namespace runmu.Business
 
         }
 
-        protected virtual string QuerySql(params Args[] values)
+        protected virtual string BuildQuerySql(params Args[] conditions)
         {
             StringBuilder builder = new StringBuilder(GetQuerySql());
 
-            foreach (var item in values)
+            if (conditions == null || conditions.Length == 0 || conditions[0] == null)
             {
-                builder.Append(item.Name);
+                return builder.ToString();
+            }
+
+            builder.Append(" WHERE ");
+            foreach (var item in conditions)
+            {
+                string name = item.Name;
+                if (name == AttributeName.Status)
+                {
+                    name = "statusID";
+                }
+                builder.Append(name);
                 builder.Append(" ");
                 builder.Append(item.Condition);
                 builder.Append(" @");
@@ -121,8 +138,10 @@ namespace runmu.Business
                 builder.Append(" and ");
             }
 
-            builder.Remove(builder.Length - 5, 5);
-
+            if (conditions != null && conditions.Length > 0)
+            {
+                builder.Remove(builder.Length - 5, 5);
+            }
 
             return builder.ToString();
         }
@@ -134,7 +153,10 @@ namespace runmu.Business
             builder.Append(" SET ");
             foreach (var item in attributes)
             {
-                builder.Append(item.Name);
+                string name = item.Name;
+
+
+                builder.Append(name);
                 builder.Append(" = @");
                 builder.Append(item.Name);
                 builder.Append(" , ");
@@ -164,8 +186,6 @@ namespace runmu.Business
             List<SQLiteParameter> args = BuildDefaultParams(attributes.ToArray());
             args.AddRange(BuildDefaultParams(conditions.ToArray()));
             args.Add(new SQLiteParameter("@date", DateTime.Now.ToString()));
-
-
 
             SQLiteCommand cmd = new SQLiteCommand(sql, conn);
             cmd.Parameters.AddRange(args.ToArray());

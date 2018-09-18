@@ -12,8 +12,8 @@ namespace runmu.Business
 
         DataTable GetAll(SQLiteConnection conn);
         Dictionary<int, string> GetNames(SQLiteConnection conn);
-        DataTable Query(SQLiteConnection conn, params Args[] values);
-        DataTable MutiplyQuery(SQLiteConnection conn, Dictionary<string, object> values);
+        DataTable Query(SQLiteConnection conn, params Args[] conditions);
+        DataTable MutiplyQuery(SQLiteConnection conn, params Args[] conditions);
         bool Update(SQLiteConnection conn, DataTable item);
         bool Update(SQLiteConnection conn, List<Args> attributes, params Args[] conditions);
         bool Delete(SQLiteConnection conn, List<int> ids);

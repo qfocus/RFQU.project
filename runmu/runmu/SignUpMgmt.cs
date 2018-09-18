@@ -118,7 +118,7 @@ namespace runmu
                         lblName.Text = "";
                         return;
                     }
-                    lblName.Text = table.Rows[0]["name"].ToString();
+                    lblName.Text = table.Rows[0]["姓名"].ToString();
 
                 }
                 catch (Exception error)
@@ -155,6 +155,7 @@ namespace runmu
 
             DateTime signDate = dtpSignup.Value;
             string signDateString = signDate.ToString(Constants.SHORT_DATE_FORMAT);
+            long signDateTimestamp = Common.GetTimeStamp(signDate);
             string qq = txtQQ.Text.Trim();
 
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
@@ -188,7 +189,7 @@ namespace runmu
                 {
                     foreach (DataRow row in signed.Rows)
                     {
-                        DateTime temp = DateTime.Parse(row[1].ToString());
+                        DateTime temp = DateTime.Parse(row[4].ToString());
                         if (start > temp)
                         {
                             start = temp;
@@ -199,7 +200,7 @@ namespace runmu
                 }
 
                 DateTime end = start.AddYears(length).AddDays(1);
-                long expire = Common.GetTimeStamp();
+                long expire = Common.GetTimeStamp(end);
                 Args[] insertParams = new Args[]
                 {
                     new Args( AttributeName.CourseID, cmbCourse.SelectedValue ),
@@ -207,7 +208,8 @@ namespace runmu
                     new Args( AttributeName.AssistantID, cmbAssistant.SelectedValue ),
                     new Args( AttributeName.PlatformID, cmbPlatform.SelectedValue ),
                     new Args( AttributeName.SignDate, signDateString ),
-                    new Args( AttributeName.LearnStatus, 1 ),
+                    new Args( AttributeName.SignTimestamp,signDateTimestamp),
+                    new Args( AttributeName.StatusID, 1 ),
                     new Args( AttributeName.PayType, cmbPayment.SelectedItem ),
                     new Args( AttributeName.ExpireDate, end.ToString(Constants.SHORT_DATE_FORMAT)),
                     new Args( AttributeName.Expire,expire)

@@ -21,11 +21,13 @@ namespace runmu.Business
         public static string StudentID = "studentID";
         public static string AssistantID = "assistantID";
         public static string PlatformID = "platformID";
-        public static string LearnStatus = "statusID";
+        //public static string LearnStatus = "statusID";
         public static string SignDate = "signDate";
+        public static string SignTimestamp = "signTimestamp";
         public static string PayType = "payType";
         public static string Values = "values";
         public static string Status = "status";
+        public static string StatusID = "statusID";
         public static string PayDate = "payDate";
         public static string ExpireDate = "expireDate";
         public static string Expire = "expire";

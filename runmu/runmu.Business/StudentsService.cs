@@ -9,14 +9,14 @@ namespace runmu.Business
 {
     public class StudentsService : Service
     {
-        private static string selectAllSql = "select ID,ID as 'QQ', name as '姓名',wechat as '微信', phone as '电话',email from students;";
+        private static string selectAllSql = @"select ID,ID as 'QQ', name as '姓名',wechat as '微信', phone as '电话',email from students ";
         private static string insertSql = @"INSERT INTO `students`
                                          (`id`,`name`,`email`,`phone`,`weChat`,`createdTime`,`updateTime`) VALUES
                                          (@ID, @name, @email, @phone, @weChat, @date, @date);";
         private static string updateSql = @"UPDATE students set name = @name, email = @email, phone = @phone, wechat = @wechat,
                                             updateTime = @date WHERE ID = @id;";
 
-        private static string querySql = @"SELECT ID, name from students WHERE ";
+    
 
         public override bool Update(SQLiteConnection conn, DataTable table)
         {
@@ -55,7 +55,7 @@ namespace runmu.Business
 
         protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
         {
-            return BuildDefaultOperateParams(values);
+            return BuildParamsWithDate(values);
         }
 
         protected override SQLiteParameter[] BuildQueryParameters(params Args[] values)
@@ -71,7 +71,7 @@ namespace runmu.Business
 
         protected override string GetQuerySql()
         {
-            return querySql;
+            return selectAllSql;
         }
 
         protected override string GetSelectAllSql()

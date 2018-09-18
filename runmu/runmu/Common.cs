@@ -10,7 +10,7 @@ namespace runmu
     {
         public static long GetTimeStamp()
         {
-            return (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+            return GetTimeStamp(DateTime.Now);
         }
 
         public static long GetTimeStamp(DateTime time)

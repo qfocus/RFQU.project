@@ -22,7 +22,8 @@ namespace runmu
         {
             InitEnvironment();
 
-            InitDataBase();
+           // InitDataBase();
+
         }
 
         public static void Backup()

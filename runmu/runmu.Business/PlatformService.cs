@@ -42,7 +42,7 @@ namespace runmu.Business
 
         protected override SQLiteParameter[] BuildInsertParameters(params Args[] values)
         {
-            return BuildDefaultOperateParams(values);
+            return BuildParamsWithDate(values);
         }
 
 
@@ -54,7 +54,7 @@ namespace runmu.Business
 
         protected override string GetQuerySql()
         {
-            throw new NotImplementedException();
+            return getAllSql;
         }
 
         protected override string GetSelectAllSql()

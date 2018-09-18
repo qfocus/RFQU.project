@@ -335,13 +335,13 @@
             this.dataContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataContainer.Location = new System.Drawing.Point(13, 213);
             this.dataContainer.Name = "dataContainer";
-            this.dataContainer.Size = new System.Drawing.Size(816, 379);
+            this.dataContainer.Size = new System.Drawing.Size(960, 416);
             this.dataContainer.TabIndex = 1;
             // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(755, 598);
+            this.btnDelete.Location = new System.Drawing.Point(896, 635);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 1005;
@@ -351,7 +351,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Enabled = false;
-            this.btnUpdate.Location = new System.Drawing.Point(674, 598);
+            this.btnUpdate.Location = new System.Drawing.Point(815, 635);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 1004;
@@ -362,7 +362,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 633);
+            this.ClientSize = new System.Drawing.Size(985, 670);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.dataContainer);
