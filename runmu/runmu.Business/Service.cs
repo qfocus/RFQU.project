@@ -19,13 +19,23 @@ namespace runmu.Business
         public abstract bool Update(SQLiteConnection conn, DataTable table);
 
 
-        public virtual void Add(SQLiteConnection conn, params Args[] values)
+        public virtual int Add(SQLiteConnection conn, params Args[] values)
         {
             string sql = GetInsertSql();
             SQLiteParameter[] parameters = BuildInsertParameters(values);
             SQLiteCommand cmd = new SQLiteCommand(sql, conn);
             cmd.Parameters.AddRange(parameters);
-            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = cmd.CommandText + @"select last_insert_rowid();";
+
+            object result = cmd.ExecuteScalar();
+
+            if (result == null)
+            {
+                return -1;
+            }
+            return Convert.ToInt32(result);
+
         }
 
         public virtual DataTable GetAll(SQLiteConnection conn)

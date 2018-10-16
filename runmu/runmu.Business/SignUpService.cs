@@ -22,7 +22,7 @@ namespace runmu.Business
         private static string insertSql =
             @"INSERT INTO `signup`
             (`courseID`,`studentID`,`assistantID`,`signDate`,`expireDate`, `expire`, `payType`,`platformID`,`statusID`,`signTimestamp`,`createdTime`,`updateTime`) VALUES 
-            (@courseID, @studentID, @assistantID, @signDate, @expireDate, @expire, @payType, @platformID, @statusID, @signTimestamp, @date, @date)";
+            (@courseID, @studentID, @assistantID, @signDate, @expireDate, @expire, @payType, @platformID, @statusID, @signTimestamp, @date, @date);";
         private static readonly Dictionary<string, string> mapping = new Dictionary<string, string>() {
             { AttributeName.StudentID,"st.ID" },
             { AttributeName.CourseID, "c.ID"},

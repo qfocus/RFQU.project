@@ -325,24 +325,12 @@ namespace runmu
             using (SQLiteConnection conn = new SQLiteConnection(Constants.DBCONN))
             {
                 conn.Open();
-                SQLiteTransaction transaction = conn.BeginTransaction();
+
                 try
                 {
-                    Importer importer = new Importer();
-                    importer.ImportFullPaymentStudents(studentsService, conn, name);
-                    transaction.Commit();
-                    Logger.Info("Import students successfully");
-
-                    DataTable originalStudents = studentsService.GetAll(conn);
-
-                    Dictionary<long, int> students = new Dictionary<long, int>();
-
-                    foreach (DataRow row in originalStudents.Rows)
-                    {
-                        students.Add(Convert.ToInt64(row[2]), Convert.ToInt32(row[1]));
-                    }
-
-
+                    Importer importer = new Importer(this.container);
+                    importer.ImportData(conn, name);
+                    MessageBox.Show("成功了！ 你可以用了！");
                 }
                 catch (Exception ex)
                 {

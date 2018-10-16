@@ -114,11 +114,10 @@ namespace runmu
 
             Args[] paras = new Args[]
             {
-                new Args( AttributeName.NAME, txtName.Text.Trim()),
-                new Args( AttributeName.QQ,txtQQ.Text ),
+                new Args(AttributeName.NAME, txtName.Text.Trim()),
+                new Args(AttributeName.QQ,txtQQ.Text ),
                 new Args(AttributeName.Alias,txtAlias.Text),
                 new Args(AttributeName.Email,txtEmail.Text),
-
             };
 
 

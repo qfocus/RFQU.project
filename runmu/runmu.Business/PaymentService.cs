@@ -16,7 +16,7 @@ namespace runmu.Business
             @"insert into `payment`
             (`courseID`,`studentID`,`payType`,`values`,`status`,`payDate`,`expire`, updateTime, createdTime)
             values
-            (@courseID, @studentID, @payType, @values, @status, @payDate, @expire, @date, @date)";
+            (@courseID, @studentID, @payType, @values, @status, @payDate, @expire, @date, @date);";
 
         private static string selectAllSql =
             @"select p.ID, s.ID, c.name as '课程',s.name as '学员', p.payType as '类型' , p.`values` as '金额', p.status as '状态',p.payDate as '日期' from payment as p

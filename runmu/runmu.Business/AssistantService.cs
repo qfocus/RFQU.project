@@ -14,7 +14,7 @@ namespace runmu.Business
         private static string insertSql = @"INSERT INTO `assistant` 
                                            (`name`,`createdTime`,`updateTime`) VALUES
                                            (@name, @date, @date);";
-        private static string updateSql = @"UPDATE `assistant` SET name = @name, updateTime = @date WHERE ID = @id";
+        private static string updateSql = @"UPDATE `assistant` SET name = @name, updateTime = @date WHERE ID = @id;";
 
 
         public override bool Update(SQLiteConnection conn, DataTable table)

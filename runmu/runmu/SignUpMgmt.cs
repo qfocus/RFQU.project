@@ -78,7 +78,7 @@ namespace runmu
                     FormCommon.InitDataContainer(dataContainer, source);
                     dataContainer.DataSource = source;
 
-                    lblPrice.Text = coursePrices[1].ToString();
+                    //lblPrice.Text = coursePrices[1].ToString();
 
 
                 }

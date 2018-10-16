@@ -17,6 +17,6 @@ namespace runmu.Business
         bool Update(SQLiteConnection conn, DataTable item);
         bool Update(SQLiteConnection conn, List<Args> attributes, params Args[] conditions);
         bool Delete(SQLiteConnection conn, List<int> ids);
-        void Add(SQLiteConnection conn, params Args[] values);
+        int Add(SQLiteConnection conn, params Args[] values);
     }
 }
